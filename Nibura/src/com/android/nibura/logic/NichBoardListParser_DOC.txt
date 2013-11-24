@@ -1,0 +1,10 @@
+The first pass RegEx should grab all of the menu properly and leave off "‘¼ƒmƒTƒCƒg"
+
+There are remaining non-board links and data in the pulled data though that must be removed.
+Those "BoardGroups" are as follows:
+
+ƒ`ƒƒƒbƒg
+‰^‰cˆÄ“à
+ƒc[ƒ‹—Ş 
+BBSPINK (A separate parser will be used for this)
+‚Ü‚¿‚a‚a‚r (A separate parser will be used for this)

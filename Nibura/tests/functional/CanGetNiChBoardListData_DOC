@@ -1,0 +1,80 @@
+Description: In order to test the 2ch BoardListFetcher and BoardListParser, an abbreviated saved version of the actual board is used.
+
+Test HTML Filename: 2CH_TEST_MENU.html
+
+In plain text, the menu should appear as follows. A double-astrik(**) designates a logical BoardGroup.
+
+===============
+
+**地震
+地震headline
+地震速報
+臨時地震
+
+**おすすめ
+プロ野球
+家電製品
+
+**特別企画
+2ch検索
+be.2ch.net
+
+**be
+面白ネタnews
+なんでも質問
+
+
+**チャット
+２ｃｈ＠ＩＲＣ
+
+**運営案内
+ガイドライン
+2chメルマガ
+夜勤の巣
+●売り場
+◆削除要請は
+削除依頼へ
+◆苦情は
+批判要望へ
+おいらのメール
+いたづらはいやづら
+
+**ツール類
+2chツール
+domo2
+DAT2HTML
+AAエディタ
+2ch検索
+スレッド検索
+
+**BBSPINK
+18歳以上！
+子供はだめ！
+TOPページ
+PINKheadline
+女神
+にゃあ
+大人のモバイル
+English
+
+**まちＢＢＳ
+TOPページ
+会議室
+九州
+沖縄
+
+**他のサイト
+megabbs
+MILKCAFE
+レンサバ比較
+ペンフロ
+
+===============
+
+The final group are general links and SHOULD NOT appear in the actual list presented to the user.
+In addition, the following groups that are present in the initial pass through are included to verify their removal after the fact:
+チャット
+運営案内
+ツール類 
+BBSPINK (A separate parser will be used for this)
+まちＢＢＳ (A separate parser will be used for this)
