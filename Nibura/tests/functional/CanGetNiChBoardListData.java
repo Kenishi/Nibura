@@ -3,8 +3,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,14 +30,38 @@ public class CanGetNiChBoardListData {
 	}
 
 	@Test
-	public void shouldHaveBoards() {
+	public void shouldHaveBoards_toStringTest() {
+		// Setup
+		String expectedBoardListString = "";
+		expectedBoardListString += "**地震\n"
+				+ "地震headline <http://headline.2ch.net/bbynamazu/>\n"
+				+ "地震速報 <http://anago.2ch.net/namazuplus/>\n"
+				+ "臨時地震 <http://hayabusa.2ch.net/eq/>\n"
+				+ "\n"
+				+ "**おすすめ\n"
+				+ "プロ野球 <http://uni.2ch.net/base/>\n"
+				+ "家電製品 <http://awabi.2ch.net/kaden/>\n"
+				+ "\n"
+				+ "**特別企画\n"
+				+ "2ch検索 <http://find.2ch.net/>\n"
+				+ "be.2ch.net <http://be.2ch.net/>\n"
+				+ "\n"
+				+ "**be\n"
+				+ "面白ネタnews <http://kohada.2ch.net/be/>\n"
+				+ "なんでも質問 <http://ikura.2ch.net/nandemo/>\n";
 		
+		// Exercise
+		BoardList boardList = fetcher.getBoardList();
+		String boardListStr = boardList.toString(); 
+		
+		// Test
+		Assert.assertEquals(expectedBoardListString, boardListStr);
 	}
 	
 	@Test
 	public void shouldHaveNonBoardsRemoved() {
 		BoardList list = fetcher.getBoardList();
-		String removedGroupNames[] = {"�`���b�g", "�^�c�ē�", "�c�[���� ", "BBSPINK", "�܂��a�a�r", "���̃T�C�g"};
+		String removedGroupNames[] = {"チャット", "運営案内", "ツール類", "BBSPINK", "まちＢＢＳ", "他のサイト"};
 		
 		// Verify that none of the group names exist in the board list
 		Iterator<BoardListElement> boardElements = list.iterator();

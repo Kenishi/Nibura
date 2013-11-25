@@ -1,4 +1,4 @@
-Description: In order to test the 2ch BoardListFetcher and BoardListParser, an abbreviated saved version of the actual board is used.
+escription: In order to test the 2ch BoardListFetcher and BoardListParser, an abbreviated saved version of the actual board is used.
 
 Test HTML Filename: 2CH_TEST_MENU.html
 
@@ -6,75 +6,75 @@ In plain text, the menu should appear as follows. A double-astrik(**) designates
 
 ===============
 
-**’nk
-’nkheadline
-’nk‘¬•ñ
-—Õ’nk
+**åœ°éœ‡
+åœ°éœ‡headline
+åœ°éœ‡é€Ÿå ±
+è‡¨æ™‚åœ°éœ‡
 
-**‚¨‚·‚·‚ß
-ƒvƒ–ì‹…
-‰Æ“d»•i
+**ãŠã™ã™ã‚
+ãƒ—ãƒ­é‡çƒ
+å®¶é›»è£½å“
 
-**“Á•ÊŠé‰æ
-2chŒŸõ
+**ç‰¹åˆ¥ä¼ç”»
+2chæ¤œç´¢
 be.2ch.net
 
 **be
-–Ê”’ƒlƒ^news
-‚È‚ñ‚Å‚à¿–â
+é¢ç™½ãƒã‚¿news
+ãªã‚“ã§ã‚‚è³ªå•
 
 
-**ƒ`ƒƒƒbƒg
-‚Q‚ƒ‚ˆ—‚h‚q‚b
+**ãƒãƒ£ãƒƒãƒˆ
+ï¼’ï½ƒï½ˆï¼ ï¼©ï¼²ï¼£
 
-**‰^‰cˆÄ“à
-ƒKƒCƒhƒ‰ƒCƒ“
-2chƒƒ‹ƒ}ƒK
-–é‹Î‚Ì‘ƒ
-œ”„‚èê
-Ÿíœ—v¿‚Í
-íœˆË—Š‚Ö
-Ÿ‹êî‚Í
-”á”»—v–]‚Ö
-‚¨‚¢‚ç‚Ìƒ[ƒ‹
-‚¢‚½‚Ã‚ç‚Í‚¢‚â‚Ã‚ç
+**é‹å–¶æ¡ˆå†…
+ã‚¬ã‚¤ãƒ‰ãƒ©ã‚¤ãƒ³
+2chãƒ¡ãƒ«ãƒã‚¬
+å¤œå‹¤ã®å·£
+â—å£²ã‚Šå ´
+â—†å‰Šé™¤è¦è«‹ã¯
+å‰Šé™¤ä¾é ¼ã¸
+â—†è‹¦æƒ…ã¯
+æ‰¹åˆ¤è¦æœ›ã¸
+ãŠã„ã‚‰ã®ãƒ¡ãƒ¼ãƒ«
+ã„ãŸã¥ã‚‰ã¯ã„ã‚„ã¥ã‚‰
 
-**ƒc[ƒ‹—Ş
-2chƒc[ƒ‹
+**ãƒ„ãƒ¼ãƒ«é¡
+2chãƒ„ãƒ¼ãƒ«
 domo2
 DAT2HTML
-AAƒGƒfƒBƒ^
-2chŒŸõ
-ƒXƒŒƒbƒhŒŸõ
+AAã‚¨ãƒ‡ã‚£ã‚¿
+2chæ¤œç´¢
+ã‚¹ãƒ¬ãƒƒãƒ‰æ¤œç´¢
 
 **BBSPINK
-18ÎˆÈãI
-q‹Ÿ‚Í‚¾‚ßI
-TOPƒy[ƒW
+18æ­³ä»¥ä¸Šï¼
+å­ä¾›ã¯ã ã‚ï¼
+TOPãƒšãƒ¼ã‚¸
 PINKheadline
-—_
-‚É‚á‚ 
-‘ål‚Ìƒ‚ƒoƒCƒ‹
+å¥³ç¥
+ã«ã‚ƒã‚
+å¤§äººã®ãƒ¢ãƒã‚¤ãƒ«
 English
 
-**‚Ü‚¿‚a‚a‚r
-TOPƒy[ƒW
-‰ï‹cº
-‹ãB
-‰«“ê
+**ã¾ã¡ï¼¢ï¼¢ï¼³
+TOPãƒšãƒ¼ã‚¸
+ä¼šè­°å®¤
+ä¹å·
+æ²–ç¸„
 
-**‘¼‚ÌƒTƒCƒg
+**ä»–ã®ã‚µã‚¤ãƒˆ
 megabbs
 MILKCAFE
-ƒŒƒ“ƒTƒo”äŠr
-ƒyƒ“ƒtƒ
+ãƒ¬ãƒ³ã‚µãƒæ¯”è¼ƒ
+ãƒšãƒ³ãƒ•ãƒ­
 
 ===============
 
 The final group are general links and SHOULD NOT appear in the actual list presented to the user.
 In addition, the following groups that are present in the initial pass through are included to verify their removal after the fact:
-ƒ`ƒƒƒbƒg
-‰^‰cˆÄ“à
-ƒc[ƒ‹—Ş 
+ãƒãƒ£ãƒƒãƒˆ
+é‹å–¶æ¡ˆå†…
+ãƒ„ãƒ¼ãƒ«é¡
 BBSPINK (A separate parser will be used for this)
-‚Ü‚¿‚a‚a‚r (A separate parser will be used for this)
+ã¾ã¡ï¼¢ï¼¢ï¼³ (A separate parser will be used for this)

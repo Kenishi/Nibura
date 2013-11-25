@@ -5,4 +5,5 @@ public interface BoardListElement {
 	
 	public String getName();
 	public String getLink();
+	public String toString();
 }
