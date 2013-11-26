@@ -9,8 +9,6 @@ public class BoardList implements Iterable<BoardListElement> {
 	public BoardList() {}
 
 	// Public Methods
-	
-	@Override
 	public Iterator<BoardListElement> iterator() {
 		return listArray.iterator();
 	}

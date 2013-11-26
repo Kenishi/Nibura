@@ -7,5 +7,4 @@ public abstract class BoardListFetcher {
 
 	public abstract BoardList getBoardList() throws UnknownMenuAccessTypeException, MenuDownloadException;
 
-
 }
