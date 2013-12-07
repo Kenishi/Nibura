@@ -21,7 +21,7 @@ public class CanGetNiChBoardListData {
 	
 	@Before
 	public void setUp() throws Exception {
-		File testBoardList = new File("/Users/Kei/git/Nibura/Nibura/tests/2CH_TEST_MENU.html");
+		File testBoardList = new File("tests/2CH_TEST_MENU.html");
 		fetcher = new NichBoardListFetcher(testBoardList);
 	}
 

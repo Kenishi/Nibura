@@ -46,5 +46,18 @@ public class BoardGroup implements BoardListElement {
 		}
 	}
 	
+	/**
+	 * Returns the number of elements in the current group. Count does not include embedded groups
+	 * @return Number of eleemnts in this group
+	 */
+	protected int debug_getElementCount() {
+		return boardLinksArray.size();
+	}
+	protected Iterator<BoardListElement> debug_iterator() {
+		return boardLinksArray.iterator();
+	}
+	protected BoardListElement debug_getElement(int index) {
+		return boardLinksArray.get(index);
+	}
 	// Private Members
 }

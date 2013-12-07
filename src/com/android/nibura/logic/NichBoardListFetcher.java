@@ -16,8 +16,6 @@ import org.jsoup.select.Elements;
 
 import com.android.nibura.logic.BoardListDownloader.MenuDownloadException;
 import com.android.nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
-import com.sun.xml.internal.rngom.binary.PatternBuilder;
-
 
 public class NichBoardListFetcher extends BoardListFetcher {
 	private final String INTERNAL_2CHMENU_URL = "http://menu.2ch.net/bbsmenu.html";
