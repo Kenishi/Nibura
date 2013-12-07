@@ -30,7 +30,7 @@ public class BoardLink implements BoardListElement {
 		String returnString = "";
 		
 		returnString += name;
-		returnString += " <" + link.toString() + ">";
+		returnString += " <" + link.toString() + ">\n";
 		
 		return returnString;
 	}

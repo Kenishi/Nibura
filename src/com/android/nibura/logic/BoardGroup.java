@@ -26,7 +26,8 @@ public class BoardGroup implements BoardListElement {
 		String returnString = "**" + groupName + "\n";
 		Iterator<BoardListElement> links = boardLinksArray.iterator();
 		while(links.hasNext()) {
-			returnString += links.toString();
+			BoardListElement element = links.next(); 
+			returnString += element.toString();
 		}
 		
 		return returnString;

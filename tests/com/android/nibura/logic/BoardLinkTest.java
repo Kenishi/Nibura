@@ -48,7 +48,7 @@ public class BoardLinkTest {
 	public void testToString() throws MalformedURLException {
 		//=== Setup
 		testBoardLink = new BoardLink(BOARDNAME, BOARD_STR_URL);
-		String expectedString = BOARDNAME + " <" + BOARD_STR_URL + ">";
+		String expectedString = BOARDNAME + " <" + BOARD_STR_URL + ">\n";
 		
 		//=== Exercise
 		String testString = testBoardLink.toString();

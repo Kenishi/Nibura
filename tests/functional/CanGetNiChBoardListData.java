@@ -43,7 +43,7 @@ public class CanGetNiChBoardListData {
 		Assert.assertSame(boardList.getClass(), BoardList.class);
 	}
 	
-	@Test
+	@Test(timeout=3000)
 	public void shouldHaveBoards_toStringTest() {
 		// Setup
 		String expectedBoardListString = "";
@@ -51,15 +51,12 @@ public class CanGetNiChBoardListData {
 				+ "地震headline <http://headline.2ch.net/bbynamazu/>\n"
 				+ "地震速報 <http://anago.2ch.net/namazuplus/>\n"
 				+ "臨時地震 <http://hayabusa.2ch.net/eq/>\n"
-				+ "\n"
 				+ "**おすすめ\n"
 				+ "プロ野球 <http://uni.2ch.net/base/>\n"
 				+ "家電製品 <http://awabi.2ch.net/kaden/>\n"
-				+ "\n"
 				+ "**特別企画\n"
 				+ "2ch検索 <http://find.2ch.net/>\n"
 				+ "be.2ch.net <http://be.2ch.net/>\n"
-				+ "\n"
 				+ "**be\n"
 				+ "面白ネタnews <http://kohada.2ch.net/be/>\n"
 				+ "なんでも質問 <http://ikura.2ch.net/nandemo/>\n";

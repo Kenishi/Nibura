@@ -2,9 +2,11 @@ package com.android.nibura.logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,7 +79,9 @@ public class NichBoardListFetcher extends BoardListFetcher {
 			
 			//Create the group and add the links
 			BoardGroup newGroup = new BoardGroup(groupName);
-			newGroup.addElements((BoardListElement[]) boardLinks.toArray());
+			newGroup.addElements(
+					boardLinks.toArray(new BoardListElement[boardLinks.size()])  // Supply an array to get an array from ArrayList
+					); 
 			
 			// Add new group to Board List
 			menuList.addElement(newGroup);
@@ -87,7 +91,11 @@ public class NichBoardListFetcher extends BoardListFetcher {
 	}
 
 	private boolean isInExcludeGroup(String groupName) {
-		
+		for(final String excludedName : EXLUDED_GROUPS) {
+			if(groupName.equals(excludedName)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -120,14 +128,12 @@ public class NichBoardListFetcher extends BoardListFetcher {
 	 * @throws ParsingErrorException
 	 */
 	private String getGroupName(String groupHTML) throws ParsingErrorException {
-		Pattern regex = Pattern.compile("(?<=<BR><BR><B>).+(?=</B><BR>)");
+		Pattern regex = Pattern.compile("(?<=(?i)<BR><BR><B>(?-i)).+(?=(?i)</B><BR>(?-i))");
 		Matcher match = regex.matcher(groupHTML);
 			
 		String groupName = null;
 		if(match.find()) {
-			if(match.groupCount() > 0) {
-				groupName = match.group(1);
-			}
+			groupName = match.group(0);
 		}
 		else {
 			groupName = "!--ERROR--!";
@@ -142,21 +148,23 @@ public class NichBoardListFetcher extends BoardListFetcher {
 	private ArrayList<String> filterForGroupsHTML(String menuHTML) {
 		/**
 		 *  RegEx Explanation:
-		 *  	"<BR><BR><B>.+?</B><BR>" - "Match the format for a group name"
-		 *  	"(.+?" - Open capture group, Match all the text following the group name 
-		 *  	"(?=(<BR><BR><B>.+?</B><BR>)" - and lookahead for the start of a new group, make the match lazy
+		 *  	"(?i)" - Turn on case insensitive mode
+		 *  	"<BR><BR><B>.+?</B><BR>" - Match the format for a group name
+		 *  	"(?-i)" - Turn off case insensitive mode
+		 *  	"(.|\\r|\\n)" - Match all the text following the group name incl. newlines 
+		 *  	"(?=((?i)<BR><BR><B>.+?</B><BR>(?-i))" - and lookahead for the start of a new group, make the match lazy and use case-insensitive mode
 		 *  	"+?)" - Make the lookahead lazy, close out the capture group.
 		 * 		Due to the lookahead nature, this will exclude the final "group" on the menu.
 		 * 		   This is expected behavior. The final 2ch group is unneeded external web links.
 		 */
 		Pattern filterPattern = 
-				Pattern.compile("<BR><BR><B>.+?</B><BR>(.+?(?=(<BR><BR><B>.+?</B><BR>)+?))");
+				Pattern.compile("(?i)(<BR><BR><B>.+?</B><BR>)(?-i)(.|\\r|\\n)+?(?=((?i)<BR><BR><B>.+?</B><BR>(?-i))+?)");
 		Matcher match = filterPattern.matcher(menuHTML);
 		
 		ArrayList<String> groups = new ArrayList<String>();
 		// Retrieve the matches found by the RegEx
 		while(match.find()) {
-			if(match.groupCount() > 0) {
+			if(match.groupCount() > -1) {
 				groups.add(match.group(0));
 			}
 		}
