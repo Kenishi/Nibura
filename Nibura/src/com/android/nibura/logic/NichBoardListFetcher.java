@@ -21,6 +21,13 @@ import com.sun.xml.internal.rngom.binary.PatternBuilder;
 
 public class NichBoardListFetcher extends BoardListFetcher {
 	private final String INTERNAL_2CHMENU_URL = "http://menu.2ch.net/bbsmenu.html";
+	private final String EXLUDED_GROUPS[] = {
+			"チャット",
+			"運営案内",
+			"ツール類",
+			"BBSPINK",
+			"まちＢＢＳ",
+			"他のサイト" };
 	
 	private BoardListDownloader boardMenuAccessor = null;
 	
@@ -42,7 +49,7 @@ public class NichBoardListFetcher extends BoardListFetcher {
 	}
 	
 	public BoardList getBoardList()
-			throws UnknownMenuAccessTypeException, MenuDownloadException
+			throws UnknownMenuAccessTypeException, MenuDownloadException, ParsingErrorException
 	{
 		String content = boardMenuAccessor.getBoardMenuHTML();
 		BoardList NichBoardList = parseContent(content);		
@@ -59,25 +66,31 @@ public class NichBoardListFetcher extends BoardListFetcher {
 		// Second Pass: Extract groups and links to data structures
 		Iterator<String> groupsIterator = filteredGroups.iterator();
 		
-		// Iterate through group blocks and add to parsedList
+		// Iterate through the group blocks and build the boardList
 		while(groupsIterator.hasNext()) {
 			String groupHTML = groupsIterator.next();
 			
+			// Get the group's name and links from the block
 			String groupName = getGroupName(groupHTML);
+			if(isInExcludeGroup(groupName)) {
+				continue;
+			}
 			ArrayList<BoardLink> boardLinks = getGroupLinks(groupHTML);
 			
+			//Create the group and add the links
 			BoardGroup newGroup = new BoardGroup(groupName);
+			newGroup.addElements((BoardListElement[]) boardLinks.toArray());
 			
-			newGroup.addElements(boardLinks);
+			// Add new group to Board List
+			menuList.addElement(newGroup);
 		}
 		
-		// Create group
+		return menuList;
+	}
+
+	private boolean isInExcludeGroup(String groupName) {
 		
-		
-		// Add the group's board links to the group
-		
-		
-		// Add group to Board List	
+		return false;
 	}
 
 	private ArrayList<BoardLink> getGroupLinks(String groupHTML) throws ParsingErrorException {

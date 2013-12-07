@@ -5,6 +5,6 @@ import com.android.nibura.logic.BoardListDownloader.UnknownMenuAccessTypeExcepti
 
 public abstract class BoardListFetcher {
 
-	public abstract BoardList getBoardList() throws UnknownMenuAccessTypeException, MenuDownloadException;
+	public abstract BoardList getBoardList() throws UnknownMenuAccessTypeException, MenuDownloadException, ParsingErrorException;
 
 }

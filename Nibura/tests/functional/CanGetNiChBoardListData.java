@@ -8,9 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.android.nibura.logic.BoardList;
+import com.android.nibura.logic.BoardListDownloader.MenuDownloadException;
+import com.android.nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
 import com.android.nibura.logic.BoardListElement;
 import com.android.nibura.logic.BoardListFetcher;
 import com.android.nibura.logic.NichBoardListFetcher;
+import com.android.nibura.logic.ParsingErrorException;
 
 
 public class CanGetNiChBoardListData {
@@ -18,17 +21,28 @@ public class CanGetNiChBoardListData {
 	
 	@Before
 	public void setUp() throws Exception {
-		File testBoardList = new File("src/2CH_TEST_MENU.html");
+		File testBoardList = new File("/Users/Kei/git/Nibura/Nibura/tests/2CH_TEST_MENU.html");
 		fetcher = new NichBoardListFetcher(testBoardList);
 	}
 
 	@Test
 	public void shouldGiveBoardList() {
-		BoardList list = fetcher.getBoardList();
+		BoardList boardList = null;
+		try {
+			boardList = fetcher.getBoardList();
+		} catch (UnknownMenuAccessTypeException e) {
+			Assert.fail(e.getMessage());
+		} catch (MenuDownloadException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(e.getMessage());
+		} catch (ParsingErrorException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(e.getMessage());
+		}
 		
-		Assert.assertSame(list.getClass(), BoardList.class);
+		Assert.assertSame(boardList.getClass(), BoardList.class);
 	}
-
+	
 	@Test
 	public void shouldHaveBoards_toStringTest() {
 		// Setup
@@ -51,7 +65,18 @@ public class CanGetNiChBoardListData {
 				+ "なんでも質問 <http://ikura.2ch.net/nandemo/>\n";
 		
 		// Exercise
-		BoardList boardList = fetcher.getBoardList();
+		BoardList boardList = null;
+		try {
+			boardList = fetcher.getBoardList();
+		} catch (UnknownMenuAccessTypeException e) {
+			Assert.fail(e.getMessage());
+		} catch (MenuDownloadException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(e.getMessage());
+		} catch (ParsingErrorException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(e.getMessage());
+		}
 		String boardListStr = boardList.toString(); 
 		
 		// Test
@@ -60,11 +85,22 @@ public class CanGetNiChBoardListData {
 	
 	@Test
 	public void shouldHaveNonBoardsRemoved() {
-		BoardList list = fetcher.getBoardList();
+		BoardList boardList = null;
+		try {
+			boardList = fetcher.getBoardList();
+		} catch (UnknownMenuAccessTypeException e) {
+			Assert.fail(e.getMessage());
+		} catch (MenuDownloadException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(e.getMessage());
+		} catch (ParsingErrorException e) {
+			// TODO Auto-generated catch block
+			Assert.fail(e.getMessage());
+		}
 		String removedGroupNames[] = {"チャット", "運営案内", "ツール類", "BBSPINK", "まちＢＢＳ", "他のサイト"};
 		
 		// Verify that none of the group names exist in the board list
-		Iterator<BoardListElement> boardElements = list.iterator();
+		Iterator<BoardListElement> boardElements = boardList.iterator();
 		while(boardElements.hasNext()) {
 			BoardListElement element = boardElements.next();
 			String elementName = element.getName();
