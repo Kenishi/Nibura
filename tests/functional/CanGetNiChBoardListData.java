@@ -106,6 +106,18 @@ public class CanGetNiChBoardListData {
 			
 			Assert.assertFalse(hasName);
 		}
+	}
+	
+	@Test
+	public void shouldGiveProperHTMLForList() {
+		BoardList boardList = null;
+		try {
+			boardList = fetcher.getBoardList();
+		} catch (UnknownMenuAccessTypeException | MenuDownloadException
+				| ParsingErrorException e) {
+			Assert.fail(e.getMessage());
+		}
+		
 		
 	}
 		
