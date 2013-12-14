@@ -1,0 +1,24 @@
+// LIST HEADER //
+<html>
+<head>
+<script src="src/com/android/nibura/html/jquery-2.0.3.min.js" />
+<script src="src/com/android/nibura/html/BoardList.js" />
+<body>
+<div id="container">
+
+// LIST CONTENT //	
+	<div id="group">
+		<div class="group-header">
+			<span id="open-close-icon"></span>NAME
+		</div>
+		<div id="group-content">
+			LINK
+			LINK
+			LINK
+		</div> // END CONTENT
+	</div> // END GROUP
+
+// LIST FOOTER //	 
+</div>	// END CONTAINER
+</body>
+</html>

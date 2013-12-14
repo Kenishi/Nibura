@@ -1,0 +1,49 @@
+ol, ul, li {
+	margin:0px;
+	padding:0px;
+	font-size:13px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#container {
+	width:300px;	
+	margin:auto;
+	margin-top:100px;
+}
+
+/* --------- COLLAPSIBLE PANELS ----------*/
+
+.group {
+    width:100%; 
+    position:relative;
+    min-height:50px;
+    overflow:auto;
+    margin-bottom: 20px;
+	border:1px solid #999;
+}
+
+.group-header {
+    width:100%; 
+    cursor:pointer;
+    min-height:50px;
+    clear:both;
+    background-color:#E5E5E5;
+    position:relative;
+}
+
+.group-header:hover {
+	color:#666;
+}
+
+.group-content { 
+    padding:0 15px 0 15px;
+    margin-top:-999px;
+}
+
+.open-close-icon {
+    width:20px;
+    height:20px;
+    position:absolute;
+    background-image:url(icon-close-open.png);
+    right:15px;
+}

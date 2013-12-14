@@ -1,11 +1,8 @@
 package com.android.nibura.logic;
 
-import static org.junit.Assert.*;
-
 import java.net.MalformedURLException;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,10 +1,7 @@
 package com.android.nibura.logic;
 
-import static org.junit.Assert.*;
-
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Before;

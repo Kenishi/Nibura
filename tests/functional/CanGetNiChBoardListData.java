@@ -33,10 +33,8 @@ public class CanGetNiChBoardListData {
 		} catch (UnknownMenuAccessTypeException e) {
 			Assert.fail(e.getMessage());
 		} catch (MenuDownloadException e) {
-			// TODO Auto-generated catch block
 			Assert.fail(e.getMessage());
 		} catch (ParsingErrorException e) {
-			// TODO Auto-generated catch block
 			Assert.fail(e.getMessage());
 		}
 		
@@ -68,10 +66,8 @@ public class CanGetNiChBoardListData {
 		} catch (UnknownMenuAccessTypeException e) {
 			Assert.fail(e.getMessage());
 		} catch (MenuDownloadException e) {
-			// TODO Auto-generated catch block
 			Assert.fail(e.getMessage());
 		} catch (ParsingErrorException e) {
-			// TODO Auto-generated catch block
 			Assert.fail(e.getMessage());
 		}
 		String boardListStr = boardList.toString(); 
@@ -88,10 +84,8 @@ public class CanGetNiChBoardListData {
 		} catch (UnknownMenuAccessTypeException e) {
 			Assert.fail(e.getMessage());
 		} catch (MenuDownloadException e) {
-			// TODO Auto-generated catch block
 			Assert.fail(e.getMessage());
 		} catch (ParsingErrorException e) {
-			// TODO Auto-generated catch block
 			Assert.fail(e.getMessage());
 		}
 		String removedGroupNames[] = {"チャット", "運営案内", "ツール類", "BBSPINK", "まちＢＢＳ", "他のサイト"};

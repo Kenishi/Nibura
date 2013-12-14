@@ -59,12 +59,14 @@ public class BoardListDownloader {
 	}
 
 	// Internal Class Exceptions
+	@SuppressWarnings("serial")
 	public class UnknownMenuAccessTypeException extends Exception {
 		public UnknownMenuAccessTypeException() {
 			super("Unknown board access menu type.");
 		}
 	}
 	
+	@SuppressWarnings("serial")
 	public class MenuDownloadException extends Exception {
 		public MenuDownloadException() {
 			super("Failed to download the board menu.");

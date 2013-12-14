@@ -1,11 +1,9 @@
 package com.android.nibura.logic;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class BoardGroup implements BoardListElement {
-	
 	private String groupName = null;
 	private ArrayList<BoardListElement> boardLinksArray = new ArrayList<BoardListElement>();
 	
@@ -49,7 +47,7 @@ public class BoardGroup implements BoardListElement {
 	
 	/**
 	 * Returns the number of elements in the current group. Count does not include embedded groups
-	 * @return Number of eleemnts in this group
+	 * @return Number of elements in this group
 	 */
 	protected int debug_getElementCount() {
 		return boardLinksArray.size();
