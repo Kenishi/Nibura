@@ -1,6 +1,8 @@
-package com.android.nibura.logic;
+package nibura.logic;
 
 import java.net.MalformedURLException;
+
+import nibura.logic.BoardLink;
 
 import org.junit.Assert;
 import org.junit.Before;

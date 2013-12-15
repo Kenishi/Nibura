@@ -1,4 +1,4 @@
-package com.android.nibura.logic;
+package nibura.logic;
 
 @SuppressWarnings("serial")
 public class ParsingErrorException extends Exception {

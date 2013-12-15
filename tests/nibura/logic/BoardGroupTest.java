@@ -1,14 +1,15 @@
-package com.android.nibura.logic;
+package nibura.logic;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
+import nibura.logic.BoardGroup;
+import nibura.logic.BoardLink;
+import nibura.logic.BoardListElement;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.android.nibura.logic.BoardGroup;
-import com.android.nibura.logic.BoardLink;
 
 public class BoardGroupTest {
 	final private String TEST_GROUP_NAME = "Test!#$縺昴ｌ縺�ｈ縺ｭ";

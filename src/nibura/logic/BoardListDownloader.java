@@ -1,4 +1,4 @@
-package com.android.nibura.logic;
+package nibura.logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,7 +39,7 @@ public class BoardListDownloader {
 		try {
 			content += menu_URL.getContent();
 		} catch (IOException e) {
-			throw new MenuDownloadException();
+			throw new MenuDownloadException(e);
 		}
 		
 		return content;
@@ -50,9 +50,11 @@ public class BoardListDownloader {
 		// "\\Z" is end of string character
 		String content;
 		try {
-			content = new Scanner(menu_file).useDelimiter("\\Z").next();
-		} catch (Exception e) {
-			throw new MenuDownloadException();
+			Scanner scanner = new Scanner(menu_file);
+			content = scanner.useDelimiter("\\Z").next();
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			throw new MenuDownloadException(e);
 		} 
 		
 		return content;
@@ -68,8 +70,9 @@ public class BoardListDownloader {
 	
 	@SuppressWarnings("serial")
 	public class MenuDownloadException extends Exception {
-		public MenuDownloadException() {
-			super("Failed to download the board menu.");
+		public MenuDownloadException(Exception e) {
+			super("Failed to download the board menu.\n" + e.getMessage());
+			
 		}
 	}
 }

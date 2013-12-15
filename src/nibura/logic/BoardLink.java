@@ -1,9 +1,9 @@
-package com.android.nibura.logic;
+package nibura.logic;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class BoardLink implements BoardListElement {
+public class BoardLink extends BoardListElement {
 	private String name = null;
 	private URL link = null;
 	

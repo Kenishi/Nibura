@@ -1,4 +1,4 @@
-package com.android.nibura.logic;
+package nibura.logic;
 
 import java.util.ArrayList;
 import java.util.Iterator;

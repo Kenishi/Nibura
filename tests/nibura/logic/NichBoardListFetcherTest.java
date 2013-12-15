@@ -1,22 +1,27 @@
-package com.android.nibura.logic;
+package nibura.logic;
 
 import static org.junit.Assert.*;
 
 import java.io.File;
 
+import nibura.logic.BoardList;
+import nibura.logic.NichBoardListFetcher;
+import nibura.logic.ParsingErrorException;
+import nibura.logic.BoardListDownloader.MenuDownloadException;
+import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.android.nibura.logic.BoardListDownloader.MenuDownloadException;
-import com.android.nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
+import functional.TestResources;
 
 public class NichBoardListFetcherTest {
 	private NichBoardListFetcher boardFetcher = null;
 	
 	@Before
 	public void setUp() throws Exception {
-		File boardListFile_in = new File("tests/NichBoardListFetcher_TESTHTML.html");
+		File boardListFile_in = new File(TestResources.SIMPLE_BOARDLIST_HTML_FILE.getURI());
 		boardFetcher = new NichBoardListFetcher(boardListFile_in);
 	}
 

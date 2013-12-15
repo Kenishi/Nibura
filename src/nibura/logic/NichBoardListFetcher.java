@@ -1,4 +1,4 @@
-package com.android.nibura.logic;
+package nibura.logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,13 +9,13 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import nibura.logic.BoardListDownloader.MenuDownloadException;
+import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import com.android.nibura.logic.BoardListDownloader.MenuDownloadException;
-import com.android.nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
 
 public class NichBoardListFetcher extends BoardListFetcher {
 	private final String INTERNAL_2CHMENU_URL = "http://menu.2ch.net/bbsmenu.html";

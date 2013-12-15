@@ -1,9 +1,9 @@
-package com.android.nibura.logic;
+package nibura.logic;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class BoardGroup implements BoardListElement {
+public class BoardGroup extends BoardListElement {
 	private String groupName = null;
 	private ArrayList<BoardListElement> boardLinksArray = new ArrayList<BoardListElement>();
 	
@@ -30,6 +30,11 @@ public class BoardGroup implements BoardListElement {
 		
 		return returnString;
 	}
+
+	public Iterator<BoardListElement> iterator() {
+		return boardLinksArray.iterator();
+	}
+
 	
 	// Protected Members
 	protected void addElement(BoardListElement element) {
@@ -59,4 +64,7 @@ public class BoardGroup implements BoardListElement {
 		return boardLinksArray.get(index);
 	}
 	// Private Members
+
+
+
 }

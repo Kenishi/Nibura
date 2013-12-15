@@ -1,6 +1,6 @@
-package com.android.nibura.logic;
+package nibura.logic;
 
-public class RootGroup extends BoardGroup implements BoardListElement {
+public class RootGroup extends BoardGroup {
 	private static RootGroup rootGroup = null;
 	
 	private RootGroup(String name) {

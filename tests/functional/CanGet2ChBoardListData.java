@@ -3,25 +3,25 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import nibura.logic.BoardList;
+import nibura.logic.BoardListElement;
+import nibura.logic.BoardListFetcher;
+import nibura.logic.NichBoardListFetcher;
+import nibura.logic.ParsingErrorException;
+import nibura.logic.BoardListDownloader.MenuDownloadException;
+import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.android.nibura.logic.BoardList;
-import com.android.nibura.logic.BoardListDownloader.MenuDownloadException;
-import com.android.nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
-import com.android.nibura.logic.BoardListElement;
-import com.android.nibura.logic.BoardListFetcher;
-import com.android.nibura.logic.NichBoardListFetcher;
-import com.android.nibura.logic.ParsingErrorException;
 
-
-public class CanGetNiChBoardListData {
+public class CanGet2ChBoardListData {
 	private BoardListFetcher fetcher = null; 
 	
 	@Before
 	public void setUp() throws Exception {
-		File testBoardList = new File("tests/2CH_TEST_MENU.html");
+		File testBoardList = new File(TestResources.TWOCH_LIST_HTML_FILE.getURI());
 		fetcher = new NichBoardListFetcher(testBoardList);
 	}
 
@@ -101,19 +101,4 @@ public class CanGetNiChBoardListData {
 			Assert.assertFalse(hasName);
 		}
 	}
-	
-	@Test
-	public void shouldGiveProperHTMLForList() {
-		BoardList boardList = null;
-		try {
-			boardList = fetcher.getBoardList();
-		} catch (UnknownMenuAccessTypeException | MenuDownloadException
-				| ParsingErrorException e) {
-			Assert.fail(e.getMessage());
-		}
-		
-		
-	}
-		
-
 }

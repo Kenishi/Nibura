@@ -13,6 +13,7 @@
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>tests</testSourceDirectory>
+    
     <resources>
       <resource>
         <directory>src</directory>
@@ -21,6 +22,7 @@
         </excludes>
       </resource>
     </resources>
+    
     <testResources>
       <testResource>
         <directory>tests</directory>
@@ -28,7 +30,12 @@
           <exclude>**/*.java</exclude>
         </excludes>
       </testResource>
-    </testResources>
+      <testResource>
+          <targetPath>${basedir}/tests/res</targetPath>
+          <directory>${basedir}/src/nibura/res</directory>
+      </testResource>	
+     </testResources>
+    
     <plugins>
     	<plugin>
     		<groupId>org.apache.maven.plugins</groupId>
