@@ -4,8 +4,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public enum ResourceHandler {
-	BOARD_LIST_HEADER_HTML ("/res/BoardListHeaderHTML.html");
-
+	BOARD_LIST_HEADER_HTML ("/res/BoardListHeaderHTML.html"),
+	BOARD_LIST_FOOTER_HTML ("/res/BoardListFooterHTML.html");
+	
 	private String relPathToRes = null;
 	
 	private ResourceHandler(String path) {

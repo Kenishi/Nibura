@@ -44,6 +44,8 @@ public class BoardListHTMLBuilder {
 		htmlHeader = scanner.useDelimiter("\\Z").next(); // Read the file in
 		scanner.close();
 		
+		htmlHeader += "\r\n";  // Add in trailing break which Scanner deletes
+		
 		return htmlHeader;
 	}
 	
@@ -69,9 +71,9 @@ public class BoardListHTMLBuilder {
 	}
 	
 	
-	private String getFooterHTML() throws FileNotFoundException {
+	private String getFooterHTML() throws FileNotFoundException, URISyntaxException {
 		String htmlFooter = "";
-		File footer_file = new File("src/BoardListHTMLFooter.html");
+		File footer_file = new File(ResourceHandler.BOARD_LIST_FOOTER_HTML.getURI());
 		Scanner scanner = new Scanner(footer_file);
 		
 		htmlFooter = scanner.useDelimiter("\\Z").next(); // Read the file in
@@ -84,7 +86,7 @@ public class BoardListHTMLBuilder {
 		String boardLinkHTML = ""
 				+ "<a href=\"" + element.getLink() + "\">"
 				+ element.getName()
-				+ "</a>";
+				+ "</a><br/>\n";
 		return boardLinkHTML;
 	}
 	
@@ -97,12 +99,12 @@ public class BoardListHTMLBuilder {
 		BoardGroup boardGroup = ((BoardGroup) element); // Cast BoardListElement up to BoardGroup 
 		
 		/* Create opening HTML for board group */
-		boardGroupHTML += 	"<div id=\"group\">"
+		boardGroupHTML += 	"<div class=\"group\">"
 				+ "<div class=\"group-header\">"
-				+ "<span id=\"open-close-icon\"></span> +"
+				+ "<span class=\"open-close-icon\"></span>"
 				+ boardGroup.getName()
 				+ "</div>\n"
-				+ "<div id=\"group-content\">\n";
+				+ "<div class=\"group-content\">\n";
 		
 		/* Add internal content */
 		Iterator<BoardListElement> groupElementIterator = boardGroup.iterator();
@@ -127,7 +129,7 @@ public class BoardListHTMLBuilder {
 		}
 		
 		/* Close the board group */
-		boardGroupHTML += "</div>\n";
+		boardGroupHTML += "</div><!--Close Group Content-->\n</div><!--Close Group-->\n";
 		
 		return boardGroupHTML;
 	}

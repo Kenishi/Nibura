@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import nibura.html.BoardListHTMLBuilder;
 import nibura.logic.BoardList;
@@ -27,34 +25,75 @@ public class CanDisplayProperBoardListHtmL {
 	}
 
 	@Test
-	public void shouldGiveProperHTMLHeaer() throws FileNotFoundException, Exception {
+	public void shouldContainProperHTMLHeader() throws FileNotFoundException, Exception {
 		// Setup
-		String expectedString = "<html>\n"
-				+ "<head>\n"
-				+ "<script src=\"src/com/android/nibura/html/jquery-2.0.3.min.js\" />\n"
-				+ "<script src=\"src/com/android/nibura/html/BoardList.js\" />\n"
-				+ "<body>\n"
-				+ "<div id=\"container\">\n";
+		String expectedString = "<!DOCTYPE html>\r\n"
+				+ "<html>\r\n"
+				+ "<head>\r\n"
+				+ "<meta charset=\"UTF-8\">\r\n"
+				+ "<script src=\"src/nibura/html/jquery-2.0.3.min.js\" type=\"text/javascript\"/></script>\r\n"
+				+ "<script src=\"src/nibura/html/BoardList.js\" type=\"text/javascript\"/></script>\r\n"
+				+ "</head>\r\n"
+				+ "<body>\r\n"
+				+ "<div id=\"container\">\r\n";
 		
 		
-		// Excercise
+		// Exercise
 		String htmlString = htmlBuilder.getHTML();
 		
-		// Test
-		Pattern regex = Pattern.compile(expectedString);
-		Matcher match = regex.matcher(htmlString);
-		if(!match.find())
-			fail("HTML Header does not match or not found");
+		// Test using contains() - DOES NOT VERIFY CORRECT POSITION
+		if(!htmlString.toLowerCase().contains(expectedString.toLowerCase()))
+			fail("HTML Header does not match or was not found.");
 	}
 	
 	@Test
-	public void shouldGiveProperHTMLContent() {
-		fail("Not yet implemented");
+	public void shouldGiveProperHTMLContent() throws FileNotFoundException, Exception {
+		// Setup
+		String expectedString = 
+				  "<div class=\"group\">"
+				+ 	"<div class=\"group-header\">"
+				+ 		"<span class=\"open-close-icon\"></span>GROUP1"
+				+ 	"</div>\n"
+				+ 	"<div class=\"group-content\">\n"
+				+ 		"<a href=\"http://board1.com/\">BOARD1</a><br/>\n"
+				+ 		"<a href=\"http://board2.com/\">BOARD2</a><br/>\n"
+				+ 		"<a href=\"http://board3.com/\">BOARD3</a><br/>\n"
+				+ 	"</div><!--Close Group Content-->\n"
+				+ "</div><!--Close Group-->\n"
+				+ "<div class=\"group\">"
+				+ 	"<div class=\"group-header\">"
+				+ 		"<span class=\"open-close-icon\"></span>GROUP2"
+				+ 	"</div>\n"
+				+ 	"<div class=\"group-content\">\n"
+				+ 	"<a href=\"http://cats1.com/\">CATS1</a><br/>\n"
+				+ 	"<a href=\"http://cats2.com/\">CATS2</a><br/>\n"
+				+ 	"</div><!--Close Group Content-->\n"
+				+ "</div><!--Close Group-->\n";
+		
+		// Exercise
+		String htmlString = htmlBuilder.getHTML();
+		
+		// Test using contains() - DOES NOT VERIFY CORRECT POSITION
+		if(!htmlString.toLowerCase().contains(expectedString.toLowerCase()))
+			fail("HTML Content does not match or was not found.");
 	}
 	
 	@Test
-	public void shouldGiveProperHTMLFooter() {
-		fail("Not yet implemented");
+	public void shouldGiveProperHTMLFooter() throws FileNotFoundException, Exception {
+		// Setup
+		String expectedString = "</div>\r\n"
+				+ "<script>\r\n"
+				+ "panelinit();\r\n"
+				+ "</script>\r\n"
+				+ "</body>\r\n"
+				+ "</html>";
+		
+		// Exercise 
+		String htmlString = htmlBuilder.getHTML();
+		
+		// Test using contains() - DOES NOT VERIFY CORRECT POSITION
+		if(!htmlString.toLowerCase().contains(expectedString.toLowerCase()))
+			fail("HTML Footer does not match or was not found.");
 	}
 
 }
