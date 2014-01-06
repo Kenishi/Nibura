@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import nibura.logic.BoardGroup;
 import nibura.logic.BoardLink;
 import nibura.logic.BoardListElement;
+import nibura.logic.BoardListElement.SuiteType;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -72,14 +73,14 @@ public class BoardGroupTest {
 		ArrayList<BoardLink> boardLinks = new ArrayList<BoardLink>();
 		
 		for(int boardCount=0; boardCount<=4; boardCount++) {
-			BoardLink testBoard = new BoardLink("Test Board " + 1, "http://2ch.TESTBOARD" + 1 + ".jp/");
+			BoardLink testBoard = new BoardLink("Test Board " + 1, "http://2ch.TESTBOARD" + 1 + ".jp/", SuiteType.NICH_SUITE);
 			boardLinks.add(testBoard);
 		}
 		
 		// Create test link and add it to array list
 		String testName = "TEST_BOARD_LINK";
 		String testURL = "http://2ch.TESTBOARDURL.jp/";
-		BoardLink testLink = new BoardLink(testName, testURL);
+		BoardLink testLink = new BoardLink(testName, testURL, SuiteType.NICH_SUITE);
 		boardLinks.add(testLink);
 		
 		int addedElementsCounter = boardLinks.size();
@@ -106,13 +107,13 @@ public class BoardGroupTest {
 		testGroup = new BoardGroup(TEST_GROUP_NAME);
 
 		for(int boardCount=0; boardCount<=4; boardCount++) {
-			BoardLink testBoard = new BoardLink("Test Board " + 1, "http://2ch.TESTBOARD" + 1 + ".jp/");
+			BoardLink testBoard = new BoardLink("Test Board " + 1, "http://2ch.TESTBOARD" + 1 + ".jp/", SuiteType.NICH_SUITE);
 			testGroup.addElement(testBoard);
 		}
 		
 		String testName = "TEST_BOARD_LINK";
 		String testURL = "http://2ch.TESTBOARDURL.jp/";
-		BoardLink boardLink = new BoardLink(testName, testURL);
+		BoardLink boardLink = new BoardLink(testName, testURL, SuiteType.NICH_SUITE);
 		
 		//=== Exercise
 		testGroup.addElement(boardLink, 2);
@@ -130,7 +131,7 @@ public class BoardGroupTest {
 	public void testAddElement() throws MalformedURLException {
 		// === Setup
 		testGroup = new BoardGroup(TEST_GROUP_NAME);
-		BoardLink boardLink = new BoardLink("Test Board 1", "http://2ch.TESTBOARD1.jp/");
+		BoardLink boardLink = new BoardLink("Test Board 1", "http://2ch.TESTBOARD1.jp/", SuiteType.NICH_SUITE);
 				
 		// === Exercise
 		testGroup.addElement(boardLink);

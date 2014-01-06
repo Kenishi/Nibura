@@ -12,7 +12,7 @@ import nibura.logic.NichBoardListFetcher;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CanDisplayProperBoardListHtmL {
+public class CanDisplaySimpleBoardListHtmL {
 	private BoardListHTMLBuilder htmlBuilder = null;
 	
 	@Before
@@ -51,20 +51,20 @@ public class CanDisplayProperBoardListHtmL {
 		// Setup
 		String expectedString = 
 				  "<div class=\"group\">"
-				+ 	"<div class=\"group-header\">"
+				+ 	"<div class=\"group-header\" style=\"padding:5px;\">"
 				+ 		"<span class=\"open-close-icon\"></span>GROUP1"
 				+ 	"</div>\n"
-				+ 	"<div class=\"group-content\">\n"
+				+ 	"<div class=\"group-content\" style=\"margin-left:10px;\">\n"
 				+ 		"<a href=\"http://board1.com/\">BOARD1</a><br/>\n"
 				+ 		"<a href=\"http://board2.com/\">BOARD2</a><br/>\n"
 				+ 		"<a href=\"http://board3.com/\">BOARD3</a><br/>\n"
 				+ 	"</div><!--Close Group Content-->\n"
 				+ "</div><!--Close Group-->\n"
 				+ "<div class=\"group\">"
-				+ 	"<div class=\"group-header\">"
+				+ 	"<div class=\"group-header\" style=\"padding:5px;\">"
 				+ 		"<span class=\"open-close-icon\"></span>GROUP2"
 				+ 	"</div>\n"
-				+ 	"<div class=\"group-content\">\n"
+				+ 	"<div class=\"group-content\" style=\"margin-left:10px;\">\n"
 				+ 	"<a href=\"http://cats1.com/\">CATS1</a><br/>\n"
 				+ 	"<a href=\"http://cats2.com/\">CATS2</a><br/>\n"
 				+ 	"</div><!--Close Group Content-->\n"

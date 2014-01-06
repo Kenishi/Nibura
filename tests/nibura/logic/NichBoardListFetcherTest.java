@@ -3,13 +3,15 @@ package nibura.logic;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 import nibura.logic.BoardList;
-import nibura.logic.NichBoardListFetcher;
 import nibura.logic.ParsingErrorException;
 import nibura.logic.BoardListDownloader.MenuDownloadException;
 import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
 
+import org.apache.http.client.ClientProtocolException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -8,7 +8,9 @@ public enum TestResources {
 	TWOCH_LIST_HTML_FILE ("/res/2CH_TEST_MENU.html"),
 		
 	/* Used Primarily in Unit Tests */
-	SIMPLE_BOARDLIST_HTML_FILE ("/res/SimpleListTestHtml.html");
+	SIMPLE_BOARDLIST_HTML_FILE ("/res/SimpleListTestHtml.html"), 
+	
+	NICH_LIVE_EXPECTED_HTML("/res/Nich_Live_Expected_List.html");
 		
 	private String relPathToRes = null;
 	

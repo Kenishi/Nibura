@@ -1,10 +1,27 @@
 package nibura.logic;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.Scanner;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 public class BoardListDownloader {
 	private File menu_file = null; // Saved file with menu HTML
@@ -22,7 +39,7 @@ public class BoardListDownloader {
 	}
 	
 	protected String getBoardMenuHTML() 
-			throws UnknownMenuAccessTypeException, MenuDownloadException {
+			throws UnknownMenuAccessTypeException, MenuDownloadException, URISyntaxException, IOException {
 		if(menu_file != null) {
 			return getContentByFile();
 		}
@@ -34,12 +51,40 @@ public class BoardListDownloader {
 		}
 	}
 	
-	private String getContentByURL() throws MenuDownloadException {
+	private String getContentByURL2() throws MenuDownloadException {
 		String content = "";
+		byte[] dataArray = new byte[128];
+		URLConnection connection = null;
 		try {
-			content += menu_URL.getContent();
+			connection = menu_URL.openConnection();
+			int read = connection.getInputStream().read(dataArray);
+			while(read >= 0) {
+				content += new String(dataArray, Charset.forName("SJIS"));
+				Arrays.fill(dataArray, (byte)0);
+				read = connection.getInputStream().read(dataArray);				
+			}
 		} catch (IOException e) {
 			throw new MenuDownloadException(e);
+		}
+		return content;
+	}
+	
+	private String getContentByURL() throws URISyntaxException, IOException {
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpGet httpget = new HttpGet(menu_URL.toURI());
+		CloseableHttpResponse response = client.execute(httpget);
+		String content = null;
+		try {
+			HttpEntity entity =  response.getEntity();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent(),Charset.forName("SJIS")));
+			String line = "";
+			while((line = reader.readLine()) != null ) {
+				content += line;
+			}
+			
+		}
+		finally {
+			response.close();
 		}
 		
 		return content;

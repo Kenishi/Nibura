@@ -2,7 +2,9 @@ package nibura.logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,14 +13,18 @@ import java.util.regex.Pattern;
 
 import nibura.logic.BoardListDownloader.MenuDownloadException;
 import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
+import nibura.logic.BoardListElement.SuiteType;
 
+import org.apache.http.client.ClientProtocolException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import org.apache.http.client.ClientProtocolException;
+
 public class NichBoardListFetcher extends BoardListFetcher {
-	private final String INTERNAL_2CHMENU_URL = "http://menu.2ch.net/bbsmenu.html";
+	private static final String INTERNAL_2CHMENU_URL = "http://menu.2ch.net/bbsmenu.html";
 	private final String EXLUDED_GROUPS[] = {
 			"チャット",
 			"運営案内",
@@ -39,15 +45,16 @@ public class NichBoardListFetcher extends BoardListFetcher {
 	}
 	
 	public NichBoardListFetcher(String menuURL) throws MalformedURLException {
-		new NichBoardListFetcher(new URL(menuURL));
+		this(new URL(menuURL));
 	}
 	
 	// Default Constructor: Use internal URL
-	public NichBoardListFetcher() {
+	public NichBoardListFetcher() throws MalformedURLException {
+		this(INTERNAL_2CHMENU_URL);
 	}
 	
-	public BoardList getBoardList()
-			throws UnknownMenuAccessTypeException, MenuDownloadException, ParsingErrorException
+	public BoardList getBoardList() 
+			throws UnknownMenuAccessTypeException, MenuDownloadException, ParsingErrorException, URISyntaxException, IOException
 	{
 		String content = boardMenuAccessor.getBoardMenuHTML();
 		BoardList NichBoardList = parseContent(content);		
@@ -110,7 +117,7 @@ public class NichBoardListFetcher extends BoardListFetcher {
 			String linkURL = link.attr("abs:href");
 			
 			try {
-				groupBoardLinks.add(new BoardLink(linkName, linkURL));
+				groupBoardLinks.add(new BoardLink(linkName, linkURL, SuiteType.NICH_SUITE));
 			} catch (MalformedURLException e) {
 				throw new ParsingErrorException("Bad URL in parsing group block.", groupHTML);
 			}
@@ -156,7 +163,7 @@ public class NichBoardListFetcher extends BoardListFetcher {
 		 * 		   This is expected behavior. The final 2ch group is unneeded external web links.
 		 */
 		Pattern filterPattern = 
-				Pattern.compile("(?i)(<BR><BR><B>.+?</B><BR>)(?-i)(.|\\r|\\n)+?(?=((?i)<BR><BR><B>.+?</B><BR>(?-i))+?)");
+				Pattern.compile("(?i)(?:<BR><BR><B>(.+?)</B><BR>)\\s*((?:<A HREF=.*?>.*?</A><BR>\\s*)+)");
 		Matcher match = filterPattern.matcher(menuHTML);
 		
 		ArrayList<String> groups = new ArrayList<String>();
@@ -165,8 +172,7 @@ public class NichBoardListFetcher extends BoardListFetcher {
 			if(match.groupCount() > -1) {
 				groups.add(match.group(0));
 			}
-		}
-		
+		}		
 		return groups;
 	}
 }

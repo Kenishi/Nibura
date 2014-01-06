@@ -35,6 +35,15 @@ public class BoardGroup extends BoardListElement {
 		return boardLinksArray.iterator();
 	}
 
+	@Override
+	public String getId() {
+		return null;
+	}
+
+	@Override
+	public SuiteType getSuiteType() {
+		return null;
+	}
 	
 	// Protected Members
 	protected void addElement(BoardListElement element) {
@@ -64,7 +73,5 @@ public class BoardGroup extends BoardListElement {
 		return boardLinksArray.get(index);
 	}
 	// Private Members
-
-
 
 }

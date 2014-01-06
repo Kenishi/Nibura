@@ -3,6 +3,7 @@ package nibura.logic;
 import java.net.MalformedURLException;
 
 import nibura.logic.BoardLink;
+import nibura.logic.BoardListElement.SuiteType;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,7 +23,7 @@ public class BoardLinkTest {
 	@Test
 	public void testGetName() throws MalformedURLException {
 		//=== Setup
-		testBoardLink = new BoardLink(BOARDNAME,BOARD_STR_URL);
+		testBoardLink = new BoardLink(BOARDNAME,BOARD_STR_URL, SuiteType.NICH_SUITE);
 		
 		//=== Exercise
 		String testName = testBoardLink.getName();
@@ -34,7 +35,7 @@ public class BoardLinkTest {
 	@Test
 	public void testGetLink() throws MalformedURLException {
 		//=== Setup
-		testBoardLink = new BoardLink(BOARDNAME,BOARD_STR_URL);
+		testBoardLink = new BoardLink(BOARDNAME,BOARD_STR_URL, SuiteType.NICH_SUITE);
 		
 		//=== Exercise
 		String testURL = testBoardLink.getLink();
@@ -46,7 +47,7 @@ public class BoardLinkTest {
 	@Test
 	public void testToString() throws MalformedURLException {
 		//=== Setup
-		testBoardLink = new BoardLink(BOARDNAME, BOARD_STR_URL);
+		testBoardLink = new BoardLink(BOARDNAME, BOARD_STR_URL, SuiteType.NICH_SUITE);
 		String expectedString = BOARDNAME + " <" + BOARD_STR_URL + ">\n";
 		
 		//=== Exercise

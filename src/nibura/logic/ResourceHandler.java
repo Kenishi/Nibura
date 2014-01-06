@@ -1,11 +1,10 @@
 package nibura.logic;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.io.InputStream;
 
 public enum ResourceHandler {
-	BOARD_LIST_HEADER_HTML ("/res/BoardListHeaderHTML.html"),
-	BOARD_LIST_FOOTER_HTML ("/res/BoardListFooterHTML.html");
+	BOARD_LIST_HEADER_HTML ("/nibura/res/BoardListHeaderHTML.html"),
+	BOARD_LIST_FOOTER_HTML ("/nibura/res/BoardListFooterHTML.html");
 	
 	private String relPathToRes = null;
 	
@@ -13,8 +12,8 @@ public enum ResourceHandler {
 		relPathToRes = path;
 	}
 	
-	public URI getURI() throws URISyntaxException {
-		URI returnURI = ResourceHandler.class.getClass().getResource(relPathToRes).toURI(); 
-		return returnURI;
+	public InputStream getResourceStream() {
+		InputStream returnStream = ResourceHandler.class.getClass().getResourceAsStream(relPathToRes); 
+		return returnStream;
 	}
 }

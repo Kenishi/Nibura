@@ -5,11 +5,9 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Nibura</name>
   <description>An 2ch browser for Android Tablets</description>
-  
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>tests</testSourceDirectory>
@@ -46,6 +44,36 @@
            		<target>1.7</target>
         	</configuration>
     	</plugin>
+    	<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-jar-plugin</artifactId>
+    		<configuration>
+    			<archive>
+    				<manifest>
+    					<addClasspath>true</addClasspath>
+    					<mainClass>nibura.html.PHPBridge</mainClass>
+    				</manifest>
+    			</archive>
+    		</configuration>
+    	</plugin>
+    	<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-shade-plugin</artifactId>
+    		<version>1.6</version>
+    		<executions>
+    			<execution>
+    				<phase>package</phase>
+    				<goals>
+    					<goal>shade</goal>
+    				</goals>
+    				<configuration>
+    					<transformers implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+    					</transformers>
+    					<mainClass>nibura.html.PHPBridge</mainClass>
+    				</configuration>
+    			</execution>
+    		</executions>
+    	</plugin>
     </plugins>
   </build>
   <dependencies>
@@ -54,7 +82,15 @@
   		<artifactId>jsoup</artifactId>
   		<version>1.7.3</version>
   	</dependency>
+  	<dependency>
+  		<groupId>com.phpjavabridge.javabridge</groupId>
+  		<artifactId>javabridge</artifactId>
+  		<version>6.2.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.httpcomponents</groupId>
+  		<artifactId>httpclient</artifactId>
+  		<version>4.3.1</version>
+  	</dependency>
   </dependencies>
-  
-
 </project>

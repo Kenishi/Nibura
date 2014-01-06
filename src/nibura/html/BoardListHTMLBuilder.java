@@ -1,8 +1,7 @@
 package nibura.html;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -13,13 +12,12 @@ import nibura.logic.BoardListElement;
 import nibura.logic.OptionsHandler;
 import nibura.logic.ResourceHandler;
 
-import org.junit.Assert;
-
 public class BoardListHTMLBuilder {
 	private BoardList boardList = null;
 	
 	public BoardListHTMLBuilder(BoardList boardList_in) {
-		Assert.assertNotNull(boardList_in);
+		if(boardList_in == null) 
+			throw new NullPointerException("Error: Null BoardList in BoardListHTMLBuilder. Submit bug report.");
 		
 		boardList = boardList_in;
 	}
@@ -36,9 +34,9 @@ public class BoardListHTMLBuilder {
 
 	// Protected
 	// Private
-	private String getHeaderHTML() throws FileNotFoundException, URISyntaxException {
+	private String getHeaderHTML() throws FileNotFoundException {
 		String htmlHeader = "";
-		File header_file = new File(ResourceHandler.BOARD_LIST_HEADER_HTML.getURI());
+		InputStream header_file = ResourceHandler.BOARD_LIST_HEADER_HTML.getResourceStream();
 		Scanner scanner = new Scanner(header_file);
 		
 		htmlHeader = scanner.useDelimiter("\\Z").next(); // Read the file in
@@ -71,9 +69,9 @@ public class BoardListHTMLBuilder {
 	}
 	
 	
-	private String getFooterHTML() throws FileNotFoundException, URISyntaxException {
+	private String getFooterHTML() throws FileNotFoundException {
 		String htmlFooter = "";
-		File footer_file = new File(ResourceHandler.BOARD_LIST_FOOTER_HTML.getURI());
+		InputStream footer_file = ResourceHandler.BOARD_LIST_FOOTER_HTML.getResourceStream();
 		Scanner scanner = new Scanner(footer_file);
 		
 		htmlFooter = scanner.useDelimiter("\\Z").next(); // Read the file in
@@ -100,11 +98,11 @@ public class BoardListHTMLBuilder {
 		
 		/* Create opening HTML for board group */
 		boardGroupHTML += 	"<div class=\"group\">"
-				+ "<div class=\"group-header\">"
+				+ "<div class=\"group-header\" style=\"padding:5px;\">"
 				+ "<span class=\"open-close-icon\"></span>"
 				+ boardGroup.getName()
 				+ "</div>\n"
-				+ "<div class=\"group-content\">\n";
+				+ "<div class=\"group-content\" style=\"margin-left:10px;\">\n";
 		
 		/* Add internal content */
 		Iterator<BoardListElement> groupElementIterator = boardGroup.iterator();
@@ -112,7 +110,7 @@ public class BoardListHTMLBuilder {
 			BoardListElement groupElement = groupElementIterator.next();
 			
 			if(groupElement instanceof BoardGroup) {
-				// Check that we aren't exceeding maxium call stack depth
+				// Check that we aren't exceeding maximum call stack depth
 				if(depthCount > OptionsHandler.getMaxGroupDepth()) {
 					throw new GroupCallStackLimitException();
 				}

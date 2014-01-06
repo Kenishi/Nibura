@@ -1,5 +1,7 @@
 package functional;
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -26,7 +28,7 @@ public class CanGet2ChBoardListData {
 	}
 
 	@Test
-	public void shouldGiveBoardList() {
+	public void shouldGiveBoardList() throws URISyntaxException, IOException {
 		BoardList boardList = null;
 		try {
 			boardList = fetcher.getBoardList();
