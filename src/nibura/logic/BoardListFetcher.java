@@ -8,6 +8,6 @@ import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
 
 public abstract class BoardListFetcher {
 
-	public abstract BoardList getBoardList() throws UnknownMenuAccessTypeException, MenuDownloadException, ParsingErrorException, URISyntaxException, IOException;
+	protected abstract BoardList getBoardList() throws UnknownMenuAccessTypeException, MenuDownloadException, ParsingErrorException, URISyntaxException, IOException;
 
 }

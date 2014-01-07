@@ -10,6 +10,8 @@ import java.io.IOException;
 import nibura.html.BoardListHTMLBuilder;
 import nibura.logic.BoardList;
 import nibura.logic.NichBoardListFetcher;
+import nibura.logic.RUNTIME_STATUS;
+import nibura.logic.RUNTIME_STATUS.STATUS;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +21,8 @@ public class CanDisplay2chBoardListHtml {
 	
 	@Before
 	public void setUp() throws Exception {
+		RUNTIME_STATUS.setStatus(STATUS.DEBUG);
+		
 		File file_in = new File(TestResources.TWOCH_LIST_HTML_FILE.getURI());
 		NichBoardListFetcher fetcher = new NichBoardListFetcher(file_in);
 		BoardList boardList = fetcher.getBoardList();

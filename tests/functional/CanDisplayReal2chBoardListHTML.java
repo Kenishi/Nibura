@@ -13,6 +13,8 @@ import nibura.logic.BoardListDownloader.MenuDownloadException;
 import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
 import nibura.logic.NichBoardListFetcher;
 import nibura.logic.ParsingErrorException;
+import nibura.logic.RUNTIME_STATUS;
+import nibura.logic.RUNTIME_STATUS.STATUS;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,7 +24,7 @@ public class CanDisplayReal2chBoardListHTML {
 
 	@Before
 	public void setUp() throws Exception {
-		
+		RUNTIME_STATUS.setStatus(STATUS.DEBUG);
 	}
 
 	@Test
@@ -39,7 +41,8 @@ public class CanDisplayReal2chBoardListHTML {
 		String html = builder.getHTML();
 		
 		// Test - Non-content test
-		//Assert.assertEquals(expectedHTML, html);
-		System.out.println(html);
+		if(!html.contains(expectedHTML)) {
+			fail("Parsed Live HTML does not contain or match expected form.");
+		}
 	}
 }

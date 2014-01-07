@@ -2,6 +2,7 @@ package nibura.logic;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.UUID;
 
 public class BoardGroup extends BoardListElement {
 	private String groupName = null;
@@ -45,6 +46,20 @@ public class BoardGroup extends BoardListElement {
 		return null;
 	}
 	
+	/**
+	 * Searches board elements looking for id
+	 * @return Returns element on match. Otherwise, returns null if not found.
+	 */
+	@Override
+	public BoardListElement getElementByID(UUID id) {
+		for(BoardListElement element : boardLinksArray) {
+			BoardListElement match = element.getElementByID(id);
+			if(match != null)
+				return match;
+		}		
+		return null;
+	}
+	
 	// Protected Members
 	protected void addElement(BoardListElement element) {
 		boardLinksArray.add(element);
@@ -58,6 +73,7 @@ public class BoardGroup extends BoardListElement {
 			boardLinksArray.add(elements[index]);
 		}
 	}
+	
 	
 	/**
 	 * Returns the number of elements in the current group. Count does not include embedded groups
@@ -73,5 +89,7 @@ public class BoardGroup extends BoardListElement {
 		return boardLinksArray.get(index);
 	}
 	// Private Members
+
+
 
 }

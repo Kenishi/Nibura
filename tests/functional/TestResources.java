@@ -10,7 +10,8 @@ public enum TestResources {
 	/* Used Primarily in Unit Tests */
 	SIMPLE_BOARDLIST_HTML_FILE ("/res/SimpleListTestHtml.html"), 
 	
-	NICH_LIVE_EXPECTED_HTML("/res/Nich_Live_Expected_List.html");
+	/* A partial file with the expected HTML after parsing */
+	NICH_LIVE_EXPECTED_HTML("/res/2CH_LIVE_BOARDLIST_EXPECTED.html");
 		
 	private String relPathToRes = null;
 	

@@ -10,6 +10,8 @@ import nibura.logic.BoardLink;
 import nibura.logic.BoardList;
 import nibura.logic.BoardListElement;
 import nibura.logic.OptionsHandler;
+import nibura.logic.RUNTIME_STATUS;
+import nibura.logic.RUNTIME_STATUS.STATUS;
 import nibura.logic.ResourceHandler;
 
 public class BoardListHTMLBuilder {
@@ -41,6 +43,20 @@ public class BoardListHTMLBuilder {
 		
 		htmlHeader = scanner.useDelimiter("\\Z").next(); // Read the file in
 		scanner.close();
+		
+		// Change script location depending on current runtime platform
+		if(RUNTIME_STATUS.getStatus() == STATUS.PHP) {
+			htmlHeader = htmlHeader.replace("$JQUERY_JS$", "JQUERY.js");
+			htmlHeader = htmlHeader.replace("$BOARDLIST_JS$", "BOARDLIST.js");
+		}
+		else if(RUNTIME_STATUS.getStatus() == STATUS.ANDROID) {
+			htmlHeader = htmlHeader.replace("$JQUERY_JS$", "file://android_asset/jquery-2.0.3.min.js");
+			htmlHeader = htmlHeader.replace("$BOARDLIST_JS$", "file://android_asset/BoardList.js");
+		}
+		else {
+			htmlHeader = htmlHeader.replace("$JQUERY_JS$", "/nibura/html/jquery-2.0.3.min.js");
+			htmlHeader = htmlHeader.replace("$BOARDLIST_JS$", "/nibura/html/BoardList.js");
+		}
 		
 		htmlHeader += "\r\n";  // Add in trailing break which Scanner deletes
 		

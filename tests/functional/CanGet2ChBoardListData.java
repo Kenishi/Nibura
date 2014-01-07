@@ -10,8 +10,10 @@ import nibura.logic.BoardListElement;
 import nibura.logic.BoardListFetcher;
 import nibura.logic.NichBoardListFetcher;
 import nibura.logic.ParsingErrorException;
+import nibura.logic.RUNTIME_STATUS;
 import nibura.logic.BoardListDownloader.MenuDownloadException;
 import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
+import nibura.logic.RUNTIME_STATUS.STATUS;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -29,6 +31,8 @@ public class CanGet2ChBoardListData {
 
 	@Test
 	public void shouldGiveBoardList() throws URISyntaxException, IOException {
+		RUNTIME_STATUS.setStatus(STATUS.DEBUG);
+		
 		BoardList boardList = null;
 		try {
 			boardList = fetcher.getBoardList();
@@ -71,6 +75,10 @@ public class CanGet2ChBoardListData {
 			Assert.fail(e.getMessage());
 		} catch (ParsingErrorException e) {
 			Assert.fail(e.getMessage());
+		} catch (IOException e) {
+			Assert.fail(e.getMessage());
+		} catch (URISyntaxException e) {
+			Assert.fail(e.getMessage());
 		}
 		String boardListStr = boardList.toString(); 
 		
@@ -88,6 +96,10 @@ public class CanGet2ChBoardListData {
 		} catch (MenuDownloadException e) {
 			Assert.fail(e.getMessage());
 		} catch (ParsingErrorException e) {
+			Assert.fail(e.getMessage());
+		} catch (IOException e) {
+			Assert.fail(e.getMessage());
+		} catch (URISyntaxException e) {
 			Assert.fail(e.getMessage());
 		}
 		String removedGroupNames[] = {"チャット", "運営案内", "ツール類", "BBSPINK", "まちＢＢＳ", "他のサイト"};

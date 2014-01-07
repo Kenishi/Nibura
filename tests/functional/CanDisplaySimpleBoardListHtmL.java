@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import nibura.html.BoardListHTMLBuilder;
 import nibura.logic.BoardList;
 import nibura.logic.NichBoardListFetcher;
+import nibura.logic.RUNTIME_STATUS;
+import nibura.logic.RUNTIME_STATUS.STATUS;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +19,9 @@ public class CanDisplaySimpleBoardListHtmL {
 	
 	@Before
 	public void setUp() throws Exception {
+		// Set Runtime Status
+		RUNTIME_STATUS.setStatus(STATUS.DEBUG);
+		
 		File file_in = new File(TestResources.SIMPLE_BOARDLIST_HTML_FILE.getURI());
 		NichBoardListFetcher fetcher = new NichBoardListFetcher(file_in);
 		BoardList boardList = fetcher.getBoardList();
@@ -27,15 +32,29 @@ public class CanDisplaySimpleBoardListHtmL {
 	@Test
 	public void shouldContainProperHTMLHeader() throws FileNotFoundException, Exception {
 		// Setup
-		String expectedString = "<!DOCTYPE html>\r\n"
-				+ "<html>\r\n"
-				+ "<head>\r\n"
-				+ "<meta charset=\"UTF-8\">\r\n"
-				+ "<script src=\"src/nibura/html/jquery-2.0.3.min.js\" type=\"text/javascript\"/></script>\r\n"
-				+ "<script src=\"src/nibura/html/BoardList.js\" type=\"text/javascript\"/></script>\r\n"
-				+ "</head>\r\n"
-				+ "<body>\r\n"
-				+ "<div id=\"container\">\r\n";
+		STATUS status = RUNTIME_STATUS.getStatus();
+		String expectedString = null;
+		if(status == STATUS.ANDROID) {
+			expectedString = "<script src=\"file://android_asset/jquery-2.0.3.min.js\" type=\"text/javascript\"></script>\r\n"
+					+ "<script src=\"file://android_asset/BoardList.js\" type=\"text/javascript\"></script>\r\n"
+					+ "</head>\r\n"
+					+ "<body>\r\n"
+					+ "<div id=\"container\">\r\n";
+		}
+		else if(status == STATUS.DEBUG) {
+			expectedString = "<script src=\"/nibura/html/jquery-2.0.3.min.js\" type=\"text/javascript\"></script>\r\n"
+					+ "<script src=\"/nibura/html/BoardList.js\" type=\"text/javascript\"></script>\r\n"
+					+ "</head>\r\n"
+					+ "<body>\r\n"
+					+ "<div id=\"container\">\r\n";
+		}
+		else if(status == STATUS.PHP) {
+			expectedString = "<script src=\"JQUERY.js\" type=\"text/javascript\"></script>\r\n"
+					+ "<script src=\"BOARDLIST.js\" type=\"text/javascript\"></script>\r\n"
+					+ "</head>\r\n"
+					+ "<body>\r\n"
+					+ "<div id=\"container\">\r\n";
+		}
 		
 		
 		// Exercise
@@ -84,9 +103,7 @@ public class CanDisplaySimpleBoardListHtmL {
 		String expectedString = "</div>\r\n"
 				+ "<script>\r\n"
 				+ "panelinit();\r\n"
-				+ "</script>\r\n"
-				+ "</body>\r\n"
-				+ "</html>";
+				+ "</script>";
 		
 		// Exercise 
 		String htmlString = htmlBuilder.getHTML();

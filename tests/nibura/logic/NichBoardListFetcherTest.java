@@ -33,11 +33,7 @@ public class NichBoardListFetcherTest {
 		BoardList boardList = null;
 		try {
 			boardList = boardFetcher.getBoardList();
-		} catch (UnknownMenuAccessTypeException e) {
-			fail(e.getMessage());
-		} catch (MenuDownloadException e) {
-			fail(e.getMessage());
-		} catch (ParsingErrorException e) {
+		} catch(Exception e) {
 			fail(e.getMessage());
 		}
 		

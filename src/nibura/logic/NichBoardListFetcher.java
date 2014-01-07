@@ -133,12 +133,12 @@ public class NichBoardListFetcher extends BoardListFetcher {
 	 * @throws ParsingErrorException
 	 */
 	private String getGroupName(String groupHTML) throws ParsingErrorException {
-		Pattern regex = Pattern.compile("(?<=(?i)<BR><BR><B>(?-i)).+(?=(?i)</B><BR>(?-i))");
+		Pattern regex = Pattern.compile("(?is)(?:<BR><BR><B>)(.+?)(?:</B><BR>)");
 		Matcher match = regex.matcher(groupHTML);
 			
 		String groupName = null;
 		if(match.find()) {
-			groupName = match.group(0);
+			groupName = match.group(1);
 		}
 		else {
 			groupName = "!--ERROR--!";

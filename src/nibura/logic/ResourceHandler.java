@@ -2,14 +2,23 @@ package nibura.logic;
 
 import java.io.InputStream;
 
+import nibura.logic.RUNTIME_STATUS.STATUS;
+
 public enum ResourceHandler {
-	BOARD_LIST_HEADER_HTML ("/nibura/res/BoardListHeaderHTML.html"),
-	BOARD_LIST_FOOTER_HTML ("/nibura/res/BoardListFooterHTML.html");
+	BOARD_LIST_HEADER_HTML ("BoardListHeaderHTML.html"),
+	BOARD_LIST_FOOTER_HTML ("BoardListFooterHTML.html");
 	
 	private String relPathToRes = null;
 	
-	private ResourceHandler(String path) {
-		relPathToRes = path;
+	private ResourceHandler(String filename) {
+		RUNTIME_STATUS.STATUS currentStatus = RUNTIME_STATUS.getStatus();
+		
+		if(currentStatus == STATUS.ANDROID) {
+			relPathToRes = "/asset/" + filename;
+		}
+		else {
+			relPathToRes = "/nibura/res/" + filename;
+		}
 	}
 	
 	public InputStream getResourceStream() {

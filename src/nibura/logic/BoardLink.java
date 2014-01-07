@@ -33,8 +33,8 @@ public class BoardLink extends BoardListElement {
 	
 	public String toString() {
 		String returnString = "";
-		
 		returnString += name;
+		returnString += " (ID: " + id + ") ";
 		returnString += " <" + link.toString() + ">\n";
 		
 		return returnString;
@@ -48,5 +48,12 @@ public class BoardLink extends BoardListElement {
 	@Override
 	public SuiteType getSuiteType() {
 		return suite;
+	}
+
+	@Override
+	public BoardListElement getElementByID(UUID target) {
+		if(id.compareTo(target) == 0)
+			return this;
+		return null;
 	}
 }
