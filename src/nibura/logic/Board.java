@@ -1,8 +1,16 @@
 package nibura.logic;
 
+import nibura.logic.BoardListElement.SuiteType;
+
 public class Board {
+	private PostList postList = null;
+	
 	public Board(BoardLink link) {
-		x`
+		SuiteType linkType = link.getSuiteType();
+		if(linkType == SuiteType.NICH_SUITE) {
+			NichBoardFetcher boardFetcher = new NichBoardFetcher(link);
+			postList = boardFetcher.getPostList();
+		}
 	}
 	
 	@SuppressWarnings("serial")
