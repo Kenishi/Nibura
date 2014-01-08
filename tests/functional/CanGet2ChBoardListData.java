@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import nibura.logic.BoardList;
 import nibura.logic.BoardListElement;
-import nibura.logic.BoardListFetcher;
+import nibura.logic.AbstractBoardListFetcher;
 import nibura.logic.NichBoardListFetcher;
 import nibura.logic.ParsingErrorException;
 import nibura.logic.RUNTIME_STATUS;
@@ -21,7 +21,7 @@ import org.junit.Test;
 
 
 public class CanGet2ChBoardListData {
-	private BoardListFetcher fetcher = null; 
+	private AbstractBoardListFetcher fetcher = null; 
 	
 	@Before
 	public void setUp() throws Exception {
@@ -47,7 +47,8 @@ public class CanGet2ChBoardListData {
 		Assert.assertSame(boardList.getClass(), BoardList.class);
 	}
 	
-	@Test(timeout=3000)
+	//@Test(timeout=3000)
+	@Test
 	public void shouldHaveBoards_toStringTest() {
 		// Setup
 		String expectedBoardListString = "";
@@ -80,7 +81,7 @@ public class CanGet2ChBoardListData {
 		} catch (URISyntaxException e) {
 			Assert.fail(e.getMessage());
 		}
-		String boardListStr = boardList.toString(); 
+		String boardListStr = boardList.toStringNoID(); 
 		
 		// Test
 		Assert.assertEquals(expectedBoardListString, boardListStr);

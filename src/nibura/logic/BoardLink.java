@@ -34,7 +34,7 @@ public class BoardLink extends BoardListElement {
 	public String toString() {
 		String returnString = "";
 		returnString += name;
-		returnString += " (ID: " + id + ") ";
+		returnString += " (ID: " + id + ")";
 		returnString += " <" + link.toString() + ">\n";
 		
 		return returnString;
@@ -55,5 +55,14 @@ public class BoardLink extends BoardListElement {
 		if(id.compareTo(target) == 0)
 			return this;
 		return null;
+	}
+
+	@Override
+	public String toStringNoID() {
+		String returnString = "";
+		returnString += name;
+		returnString += " <" + link.toString() + ">\n";
+		
+		return returnString;
 	}
 }

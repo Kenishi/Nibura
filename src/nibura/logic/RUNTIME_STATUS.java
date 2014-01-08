@@ -7,7 +7,7 @@ public class RUNTIME_STATUS {
 		PHP;
 	}
 	
-	private static STATUS status = STATUS.DEBUG;
+	private static STATUS status = null;
 	
 	public RUNTIME_STATUS() {
 	}
@@ -17,6 +17,7 @@ public class RUNTIME_STATUS {
 	}
 	
 	public static STATUS getStatus() {
+		assert status != null;
 		return status;
 	}
 }

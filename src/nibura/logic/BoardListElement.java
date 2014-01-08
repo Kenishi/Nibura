@@ -15,4 +15,5 @@ public abstract class BoardListElement {
 	public abstract BoardListElement getElementByID(UUID target);
 	public abstract SuiteType getSuiteType();
 	public abstract String toString();	
+	public abstract String toStringNoID();
 }

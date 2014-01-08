@@ -15,15 +15,12 @@ import nibura.logic.BoardListDownloader.MenuDownloadException;
 import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
 import nibura.logic.BoardListElement.SuiteType;
 
-import org.apache.http.client.ClientProtocolException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import org.apache.http.client.ClientProtocolException;
-
-public class NichBoardListFetcher extends BoardListFetcher {
+public class NichBoardListFetcher extends AbstractBoardListFetcher {
 	private static final String INTERNAL_2CHMENU_URL = "http://menu.2ch.net/bbsmenu.html";
 	private final String EXLUDED_GROUPS[] = {
 			"チャット",

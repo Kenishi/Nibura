@@ -27,6 +27,15 @@ public class BoardList implements Iterable<BoardListElement> {
 		return returnStr;
 	}
 	
+	public String toStringNoID() {
+		String returnStr = "";
+		
+		for(BoardListElement element : this) {
+			returnStr += element.toStringNoID();
+		}
+		return returnStr;
+	}
+	
 	public BoardListElement getElementByUUID(UUID id) {
 		for(BoardListElement element : listArray) {
 			BoardListElement match = element.getElementByID(id);

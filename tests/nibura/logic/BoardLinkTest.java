@@ -48,10 +48,12 @@ public class BoardLinkTest {
 	public void testToString() throws MalformedURLException {
 		//=== Setup
 		testBoardLink = new BoardLink(BOARDNAME, BOARD_STR_URL, SuiteType.NICH_SUITE);
-		String expectedString = BOARDNAME + " <" + BOARD_STR_URL + ">\n";
+		String expectedString = BOARDNAME + " (ID: $ID$)" + " <" + BOARD_STR_URL + ">\n";
 		
 		//=== Exercise
 		String testString = testBoardLink.toString();
+		String id = testBoardLink.getId();
+		expectedString = expectedString.replace("$ID$", id);
 		
 		//=== Test
 		Assert.assertEquals(expectedString, testString);

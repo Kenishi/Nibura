@@ -83,11 +83,6 @@
   		<version>1.7.3</version>
   	</dependency>
   	<dependency>
-  		<groupId>com.phpjavabridge.javabridge</groupId>
-  		<artifactId>javabridge</artifactId>
-  		<version>6.2.1</version>
-  	</dependency>
-  	<dependency>
   		<groupId>org.apache.httpcomponents</groupId>
   		<artifactId>httpclient</artifactId>
   		<version>4.3.1</version>

@@ -2,6 +2,7 @@ package nibura.logic;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import nibura.logic.BoardGroup;
 import nibura.logic.BoardLink;
@@ -139,6 +140,21 @@ public class BoardGroupTest {
 		
 		// === Test
 		Assert.assertEquals(boardLink, testElement);		
+	}
+	
+	@Test
+	public void testGetElementByID() throws MalformedURLException {
+		// Setup
+		testGroup = new BoardGroup(TEST_GROUP_NAME);
+		BoardLink boardLink = new BoardLink("Test Board 1", "http://2ch.TESTBOARD1.jp/", SuiteType.NICH_SUITE);
+		String idStr = boardLink.getId();
+		testGroup.addElement(boardLink);
+		
+		// Exercise
+		BoardListElement element = testGroup.getElementByID(UUID.fromString(idStr));
+		
+		// Test
+		Assert.assertSame(boardLink, element);
 	}
 
 }

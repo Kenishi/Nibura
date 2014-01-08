@@ -5,15 +5,15 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.UUID;
 
+import javax.swing.JOptionPane;
+
 import nibura.logic.Board;
 import nibura.logic.BoardGroup;
 import nibura.logic.BoardLink;
 import nibura.logic.BoardList;
-import nibura.logic.BoardListDownloader;
 import nibura.logic.BoardListDownloader.MenuDownloadException;
 import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
 import nibura.logic.BoardListElement;
-import nibura.logic.BoardListFetcher;
 import nibura.logic.NichBoardListFetcher;
 import nibura.logic.ParsingErrorException;
 
@@ -22,7 +22,7 @@ public class Actor {
 		SHOW_BOARDLIST,
 		SHOW_BOARD,
 		SHOW_POST,
-		UNNOWN;
+		UNNOWN, EXIT;
 	}
 	
 	BoardList boardList = null;
@@ -32,7 +32,11 @@ public class Actor {
 		while(true) {
 			COMMAND cmd = commandMenu();
 			if(cmd == COMMAND.SHOW_BOARDLIST) {
-				loadBoardList();
+				try {
+					loadBoardList();
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
 			}
 			else if(cmd == COMMAND.SHOW_BOARD) {
 				doBoardLoad();
@@ -40,7 +44,14 @@ public class Actor {
 			else if(cmd == COMMAND.SHOW_POST) {
 				doPostLoad();
 			}
+			else if(cmd == COMMAND.EXIT) {
+				break;
+			}
 		}
+	}
+
+	private void doPostLoad() {
+		System.out.println("Not implemented yet.");
 	}
 
 	private void doBoardLoad() {
@@ -70,7 +81,7 @@ public class Actor {
 		String id = "-1";
 		String out = "Input board ID to load (-1 to abort): ";
 		System.out.print(out);
-		id = System.console().readLine();
+		id = JOptionPane.showInputDialog("Input Link ID: ");
 		
 		return id;
 	}
@@ -79,13 +90,14 @@ public class Actor {
 		String out = "";
 		out += "1: Load/Show BoardList\n";
 		if(boardList != null)
-			out += "2: Load/Show Board";
+			out += "2: Load/Show Board\n";
 		if(board != null)
-			out += "3: Load Post";
+			out += "3: Load Post\n";
 		out += "0: Exit";
 		System.out.println(out);
 		
-		String input = System.console().readLine();
+		String input = JOptionPane.showInputDialog("Input (1,2,3,0):");
+		if(input == null) input = "0";
 		Integer response = Integer.decode(input);
 		if(response == 1)
 			return COMMAND.SHOW_BOARDLIST;
@@ -93,13 +105,15 @@ public class Actor {
 			return COMMAND.SHOW_BOARD;
 		else if(response == 3)
 			return COMMAND.SHOW_POST;
+		else if(response == 0)
+			return COMMAND.EXIT;
 		else
 			return COMMAND.UNNOWN;
 	}
 	
 	private void loadBoardList() throws MalformedURLException {
 		NichBoardListFetcher fetcher = new NichBoardListFetcher();
-		BoardList boardList = null;
+		boardList = null;
 		try {
 			boardList = fetcher.getBoardList();
 		} catch (UnknownMenuAccessTypeException | MenuDownloadException

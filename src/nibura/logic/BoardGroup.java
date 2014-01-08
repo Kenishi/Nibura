@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
 
-public class BoardGroup extends BoardListElement {
+public class BoardGroup extends BoardListElement implements Iterable<BoardListElement> {
 	private String groupName = null;
 	private ArrayList<BoardListElement> boardLinksArray = new ArrayList<BoardListElement>();
 	
@@ -27,6 +27,16 @@ public class BoardGroup extends BoardListElement {
 		while(links.hasNext()) {
 			BoardListElement element = links.next(); 
 			returnString += element.toString();
+		}
+		
+		return returnString;
+	}
+	
+	@Override
+	public String toStringNoID() {
+		String returnString = "**" + groupName + "\n";
+		for(BoardListElement element : this) {
+			returnString += element.toStringNoID();
 		}
 		
 		return returnString;
@@ -89,7 +99,5 @@ public class BoardGroup extends BoardListElement {
 		return boardLinksArray.get(index);
 	}
 	// Private Members
-
-
 
 }
