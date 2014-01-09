@@ -14,13 +14,16 @@ public class BoardLink extends BoardListElement {
 		this(boardName, new URL(url), suite);
 	}
 	
-	public BoardLink(String boardName, URL url, SuiteType suite)
+	public BoardLink(String boardName, URL url, SuiteType type)
 	{
 		name = boardName;
 		link = url;
+		suite = type;
 		
 		// Create unique ID
 		id = UUID.randomUUID();
+		
+		
 	}
 	
 	public String getName() {

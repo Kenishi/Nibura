@@ -55,8 +55,32 @@ public class PostLink {
 		return lastUpdate;
 	}
 	
-	public boolean isNewer(PostLink post) {
-		Date postDate = post.getLastUpdate();
-		postDate.c
+	/**
+	 * Checks if this post is updated from comparedPost.
+	 * @param comparePost The new PostLink to compare against.
+	 * @return Returns true when the comparePost is newer. Returns false when there is no update or if the posts are not the same.
+	 */
+	public boolean isUpdated(PostLink comparePost) {
+		if(this.isSamePostLink(comparePost)) {
+			if(comparePost.getPostCount() > this.getPostCount()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Checks that content matches. Ignores last update and post count.
+	 * @param comparePost
+	 * @return Returns true if they are the same post link. Otherwise, false.
+	 */
+	public boolean isSamePostLink(PostLink comparePost) {
+		if(comparePost.getSuiteType() != suite)
+			return false;
+		if(comparePost.getTitle().equals(title) == false)
+			return false;
+		if(comparePost.getURL().equals(postLink) == false)
+			return false;
+		return true;
 	}
 }

@@ -11,8 +11,12 @@ public enum TestResources {
 	SIMPLE_BOARDLIST_HTML_FILE ("/res/SimpleListTestHtml.html"), 
 	
 	/* A partial file with the expected HTML after parsing */
-	NICH_LIVE_EXPECTED_HTML("/res/2CH_LIVE_BOARDLIST_EXPECTED.html");
-		
+	NICH_LIVE_EXPECTED_HTML("/res/2CH_LIVE_BOARDLIST_EXPECTED.html"),
+	
+	/* A partial board HTML */
+	NICH_LIVE_BOARD_HTML("/res/2CH_TEST_BOARD.html"),
+	NICH_LIVE_BOARD_EXPECTED("/res/2CH_TEST_BOARD_EXPECTED.csv");
+	
 	private String relPathToRes = null;
 	
 	private TestResources(String path) {

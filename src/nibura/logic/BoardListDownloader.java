@@ -51,23 +51,6 @@ public class BoardListDownloader {
 		}
 	}
 	
-	private String getContentByURL2() throws MenuDownloadException {
-		String content = "";
-		byte[] dataArray = new byte[128];
-		URLConnection connection = null;
-		try {
-			connection = menu_URL.openConnection();
-			int read = connection.getInputStream().read(dataArray);
-			while(read >= 0) {
-				content += new String(dataArray, Charset.forName("SJIS"));
-				Arrays.fill(dataArray, (byte)0);
-				read = connection.getInputStream().read(dataArray);				
-			}
-		} catch (IOException e) {
-			throw new MenuDownloadException(e);
-		}
-		return content;
-	}
 	
 	private String getContentByURL() throws URISyntaxException, IOException {
 		CloseableHttpClient client = HttpClients.createDefault();

@@ -8,4 +8,8 @@ public class PostList {
 	public PostList() {
 		postList = new ArrayList<PostLink>();
 	}
+	
+	protected void addPostLink(PostLink link) {
+		postList.add(link);
+	}
 }
