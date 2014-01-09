@@ -14,6 +14,8 @@ import nibura.logic.BoardList;
 import nibura.logic.BoardListDownloader.MenuDownloadException;
 import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
 import nibura.logic.BoardListElement;
+import nibura.logic.InvalidBoardException;
+import nibura.logic.InvalidSuiteTypeException;
 import nibura.logic.NichBoardListFetcher;
 import nibura.logic.ParsingErrorException;
 
@@ -39,7 +41,13 @@ public class Actor {
 				}
 			}
 			else if(cmd == COMMAND.SHOW_BOARD) {
-				doBoardLoad();
+				try {
+					doBoardLoad();
+				} catch (InvalidSuiteTypeException | ParsingErrorException
+						| InvalidBoardException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			else if(cmd == COMMAND.SHOW_POST) {
 				doPostLoad();
@@ -54,7 +62,7 @@ public class Actor {
 		System.out.println("Not implemented yet.");
 	}
 
-	private void doBoardLoad() {
+	private void doBoardLoad() throws InvalidSuiteTypeException, ParsingErrorException, InvalidBoardException {
 		String boardID = requestBoardID();
 		if(boardID.equals("-1")) // Abort board load
 			return;

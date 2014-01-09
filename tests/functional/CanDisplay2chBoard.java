@@ -1,14 +1,19 @@
 package functional;
 
-import static org.junit.Assert.*;
-
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.util.Scanner;
 
 import junit.framework.Assert;
 import nibura.logic.Board;
+import nibura.logic.InvalidSuiteTypeException;
+import nibura.logic.ParsingErrorException;
 import nibura.logic.PostList;
-import nibura.logic.Board.InvalidBoardException;
+import nibura.logic.InvalidBoardException;
 import nibura.logic.BoardLink;
+import nibura.logic.PostListCreator;
 import nibura.logic.BoardListElement.SuiteType;
 
 import org.junit.Before;
@@ -24,7 +29,7 @@ public class CanDisplay2chBoard {
 	}
 
 	@Test(expected=InvalidBoardException.class)
-	public void shouldFailCorrectlyNonBoard() throws MalformedURLException {
+	public void shouldFailCorrectly404Board() throws MalformedURLException, InvalidSuiteTypeException, ParsingErrorException, InvalidBoardException {
 		// Setup
 		boardLink = new BoardLink("2NN+", "http://newsnavi.2ch.net/",SuiteType.NICH_SUITE);
 		
@@ -33,9 +38,16 @@ public class CanDisplay2chBoard {
 	}
 	
 	@Test
-	public void shouldParseBoardList() {
+	public void shouldParseBoardList() throws FileNotFoundException, URISyntaxException {
 		// Setup
+		File boardFile = new File(TestResources.NICH_LIVE_BOARD_HTML.getURI());
+		Scanner scanner = new Scanner(boardFile);
+		String data = scanner.useDelimiter("\\Z").next();
+		
+		PostListCreator creator = new PostListCreator(TestResources.NICH_LIVE_BOARD_EXPECTED.getURI());
+		
 		// Exercise
+		
 		// Test
 	}
 
