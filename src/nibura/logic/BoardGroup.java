@@ -1,3 +1,17 @@
+/**
+ * 
+ * BoardGroup.java
+ * 
+ * BoardGroup is the logical object for grouping Board Links on the Board List.
+ * 
+ * It implements the BoardListElement interface but will not return a link when
+ * getLink() is called on it, it will merely return NO_BOARD_LINK.
+ * 
+ * This class will also not return a SuiteType or an ID as BoardGroups are considered
+ * to be neutral items. Logically, you can hold board links to different types of boards
+ * under a single group. (Ex: Having a group "Favorites" for different links).
+ * 
+ */
 package nibura.logic;
 
 import java.util.ArrayList;

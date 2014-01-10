@@ -1,8 +1,10 @@
 package nibura.logic;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +18,7 @@ import nibura.logic.BoardListElement.SuiteType;
 public class NichBoardFetcher extends AbstractBoardFetcher {
 	PostList postList = new PostList();
 	
-	public NichBoardFetcher(BoardLink link) throws InvalidSuiteTypeException, ParsingErrorException, InvalidBoardException, MalformedURLException {
+	public NichBoardFetcher(BoardLink link) throws InvalidSuiteTypeException, ParsingErrorException, InvalidBoardException, MalformedURLException, FileNotFoundException {
 		if(!(link instanceof FileBoardLink)) {
 			
 			// Confirm suite is as expected
@@ -30,13 +32,19 @@ public class NichBoardFetcher extends AbstractBoardFetcher {
 			// Begin parsing
 			postList = parseHTML(html, link.getLink());
 		}
-		else {
+		else { // File method for unit testing
 			// Confirm suite is as expected
 			if(link.getSuiteType() != SuiteType.NICH_SUITE)
 				throw new InvalidSuiteTypeException("Board Fetcher expected NICH_SUITE, but got "
 								+ link.getSuiteType().toString() + "instead.");
 			//Get HTML from File
-			Scanner scanner = new Scanner()
+			FileBoardLink fileLink = (FileBoardLink)link;
+			Scanner scanner = new Scanner(fileLink.getFile());
+			String html = scanner.useDelimiter("\\Z").next();
+			scanner.close();
+			
+			// Begin parsing
+			postList = parseHTML(html,fileLink.getLink());
 		}
 	
 	}

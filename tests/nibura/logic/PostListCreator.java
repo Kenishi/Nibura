@@ -7,22 +7,19 @@ import java.util.Scanner;
 
 public class PostListCreator {
 	private File csvFile = null;
+	private BoardLink boardLink = null;
 	
-	public PostListCreator(URI uri) {
+	public PostListCreator(URI uri, BoardLink link) {
 		csvFile = new File(uri);
+		boardLink = link;
 	}
 	
 	public PostList createPostListFromCSV() throws FileNotFoundException {
 		PostList postList = new PostList();
 		Scanner scanner = new Scanner(csvFile);
 		scanner.useDelimiter(",");
-		
+		String url
 		
 		return postList;
-	}
-	
-	private String getCSVText() throws FileNotFoundException {
-		Scanner scanner = new Scanner(csvFile);
-		return scanner.useDelimiter("\\Z").next();
 	}
 }
