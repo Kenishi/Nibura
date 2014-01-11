@@ -1,5 +1,6 @@
 package interactor;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -18,6 +19,7 @@ import nibura.logic.InvalidBoardException;
 import nibura.logic.InvalidSuiteTypeException;
 import nibura.logic.NichBoardListFetcher;
 import nibura.logic.ParsingErrorException;
+import nibura.logic.ThreadLink;
 
 public class Actor {
 	enum COMMAND {
@@ -30,7 +32,7 @@ public class Actor {
 	BoardList boardList = null;
 	Board board = null;
 	
-	public Actor() {
+	public Actor() throws MalformedURLException, FileNotFoundException {
 		while(true) {
 			COMMAND cmd = commandMenu();
 			if(cmd == COMMAND.SHOW_BOARDLIST) {
@@ -50,7 +52,7 @@ public class Actor {
 				}
 			}
 			else if(cmd == COMMAND.SHOW_POST) {
-				doPostLoad();
+				doThreadLoad();
 			}
 			else if(cmd == COMMAND.EXIT) {
 				break;
@@ -58,11 +60,24 @@ public class Actor {
 		}
 	}
 
-	private void doPostLoad() {
-		System.out.println("Not implemented yet.");
+	private void doThreadLoad() {
+		String postID = requestThreadID();
+		
+		if(postID.equals("-1"))
+			return;
+		
+		UUID targetID = UUID.fromString(postID);
+		ThreadLink threadLink = board.getThreadLinkByID(targetID);
+		if(postLink == null) {
+			System.out.println("Post link not found. Check that input was correct.");
+			return;
+		}
+		Thread thread = new Thread(threadLink);
+		System.out.println(thread.toString());
+		
 	}
 
-	private void doBoardLoad() throws InvalidSuiteTypeException, ParsingErrorException, InvalidBoardException {
+	private void doBoardLoad() throws InvalidSuiteTypeException, ParsingErrorException, InvalidBoardException, MalformedURLException, FileNotFoundException {
 		String boardID = requestBoardID();
 		if(boardID.equals("-1")) // Abort board load
 			return;
@@ -78,7 +93,7 @@ public class Actor {
 		}
 		else if(link instanceof BoardLink) {
 			board = new Board((BoardLink)link);
-			System.out.println(board.toString());
+			System.out.println(board.toString_withID());
 		}
 		else {
 			System.out.println("Matched element of Unknown Type.");

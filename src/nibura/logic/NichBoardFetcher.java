@@ -16,7 +16,7 @@ import org.jsoup.select.Elements;
 import nibura.logic.BoardListElement.SuiteType;
 
 public class NichBoardFetcher extends AbstractBoardFetcher {
-	PostList postList = new PostList();
+	ThreadList postList = new ThreadList();
 	
 	public NichBoardFetcher(BoardLink link) throws InvalidSuiteTypeException, ParsingErrorException, InvalidBoardException, MalformedURLException, FileNotFoundException {
 		if(!(link instanceof FileBoardLink)) {
@@ -51,7 +51,7 @@ public class NichBoardFetcher extends AbstractBoardFetcher {
 	
 	protected NichBoardFetcher() {}
 	
-	public PostList getPostList() {
+	public ThreadList getThreadList() {
 		return postList;
 	}
 	
@@ -75,8 +75,8 @@ public class NichBoardFetcher extends AbstractBoardFetcher {
 	 * @throws ParsingErrorException 
 	 * @throws MalformedURLException 
 	 */
-	private PostList parseHTML(String html, String boardURL) throws ParsingErrorException, MalformedURLException {
-		PostList list = new PostList();
+	private ThreadList parseHTML(String html, String boardURL) throws ParsingErrorException, MalformedURLException {
+		ThreadList list = new ThreadList();
 		Document doc = Jsoup.parse(html);
 		
 		Elements elements = doc.select("#trad > a");
@@ -87,17 +87,24 @@ public class NichBoardFetcher extends AbstractBoardFetcher {
 			
 			// Parse string
 			String eleText = ele.text();
-			String regex = "(?is)(?<ord>[\\d]+?): (?<title>(.+))(?:\\((?<count>\\d+)\\))";
+			String regex = "(?is)(?<ord>[\\d]+?): (?<title>(.*))(?:.*)(?:\\((?<count>\\d+)\\))";
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(eleText);
 			matcher.find();
-			
-			String title = matcher.group("title");
-			String countStr = matcher.group("count");
-			int count = Integer.parseInt(countStr);
-			
-			PostLink post = new PostLink(title,postURL,count,SuiteType.NICH_SUITE,new Date());
-			list.addPostLink(post);
+			String title, countStr = "";
+			int count = 0;
+			try {
+				title = matcher.group("title");
+				countStr = matcher.group("count");
+				count = Integer.parseInt(countStr);
+			}
+			catch(IllegalStateException e) {
+				System.out.println("Match not found: " + eleText);
+				throw new ParsingErrorException("Match not found while parsing: " + boardURL, eleText);
+			}
+				
+			ThreadLink post = new ThreadLink(title,postURL,count,SuiteType.NICH_SUITE,new Date());
+			list.addThreadLink(post);
 		}
 		return list;
 	}
