@@ -125,6 +125,10 @@ public class CanDisplay2chBoard {
 		
 	}
 	
+	/*
+	 * Used in the shouldHandleAll2chBoards test.
+	 * This function retrieves all the board links so that they can be loaded
+	 */
 	private ArrayList<BoardLink> getBoardLinks(BoardListElement ele) {
 		ArrayList<BoardLink> links = new ArrayList<BoardLink>();
 		if(ele instanceof BoardLink) {

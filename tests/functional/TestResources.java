@@ -1,7 +1,9 @@
 package functional;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 public enum TestResources {
 	/* Used in Functional Tests to test actual site parsing */
@@ -15,7 +17,13 @@ public enum TestResources {
 	
 	/* A partial board HTML */
 	NICH_LIVE_BOARD_HTML("/res/2CH_TEST_BOARD.html"),
-	NICH_LIVE_BOARD_EXPECTED("/res/2CH_TEST_BOARD_EXPECTED.csv");
+	NICH_LIVE_BOARD_EXPECTED("/res/2CH_TEST_BOARD_EXPECTED.csv"),
+	
+	/* A partial thread */
+	NICH_LIVE_THREAD_HTML("/res/2CH_TEST_THREAD.html"),
+	
+	/* Test Resource to chekc Apache Sever */
+	APACHE_TEST_RESOURCE("/res/APACHE_TEST.txt");
 	
 	private String relPathToRes = null;
 	
@@ -25,5 +33,11 @@ public enum TestResources {
 	
 	public URI getURI() throws URISyntaxException {
 		return TestResources.class.getClass().getResource(relPathToRes).toURI();
+
+	}
+	
+	public URL getLocalURL() throws IOException {
+		URL url = new URL("http://localhost:6000" + relPathToRes);
+		return url;
 	}
 }
