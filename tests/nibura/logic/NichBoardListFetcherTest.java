@@ -38,7 +38,7 @@ public class NichBoardListFetcherTest {
 		}
 		
 		//=== Exercise
-		String boardString = boardList.toString();
+		String boardString = boardList.toStringNoID();
 		
 		String expectedString = "" +
 				"**GROUP1\n" +
