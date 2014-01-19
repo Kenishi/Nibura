@@ -1,5 +1,7 @@
 package nibura.logic;
 
+import java.util.ArrayList;
+
 public class Thread {
 	ArrayList<Post> posts = null;
 	
@@ -9,6 +11,6 @@ public class Thread {
 	}
 	
 	public Post getPost(int postNum) {
-		
+		return posts.get(postNum);
 	}
 }

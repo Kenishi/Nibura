@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -15,7 +16,6 @@ import nibura.logic.BoardList;
 import nibura.logic.BoardListDownloader.MenuDownloadException;
 import nibura.logic.BoardListDownloader.UnknownMenuAccessTypeException;
 import nibura.logic.BoardListElement;
-import nibura.logic.FileBoardLink;
 import nibura.logic.InvalidSuiteTypeException;
 import nibura.logic.NichBoardListFetcher;
 import nibura.logic.ParsingErrorException;
@@ -26,7 +26,8 @@ import nibura.logic.BoardLink;
 import nibura.logic.PostListCreator;
 import nibura.logic.BoardListElement.SuiteType;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.Assert;
@@ -35,6 +36,15 @@ public class CanDisplay2chBoard {
 	private Board board = null;
 	private BoardLink boardLink = null;
 	private ThreadList postList = null;
+	
+	@BeforeClass
+	public static void setUpOnce() throws IOException {
+		ApacheServer.createServerInstance();
+	}
+	@AfterClass
+	public static void tearDownOnce() {
+		ApacheServer.exit();
+	}
 	
 	/*
 	 * This test confirms that the parser should reject links that lack proper post links.
@@ -56,10 +66,10 @@ public class CanDisplay2chBoard {
 	 * This tests against a simplified prior-saved post list chunk.
 	 */
 	@Test
-	public void shouldParseBoardList() throws FileNotFoundException, URISyntaxException, MalformedURLException, InvalidSuiteTypeException, ParsingErrorException, InvalidBoardException {
+	public void shouldParseBoardList() throws URISyntaxException, InvalidSuiteTypeException, ParsingErrorException, InvalidBoardException, IOException {
 		// Setup		
-		URI fileURI = TestResources.NICH_LIVE_BOARD_HTML.getURI();
-		FileBoardLink boardLink = new FileBoardLink("2NN+", "http://newsnavi.2ch.net/", SuiteType.NICH_SUITE, new File(fileURI));
+		URL url = TestResources.NICH_LIVE_BOARD_HTML.getLocalURL();
+		BoardLink boardLink = new BoardLink("起業、ベンチャー", url.toString(), SuiteType.NICH_SUITE);
 
 		// Build expected post list from pre-saved CSV file
 		PostListCreator creator = new PostListCreator(TestResources.NICH_LIVE_BOARD_EXPECTED.getURI(), boardLink);

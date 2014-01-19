@@ -17,7 +17,9 @@ public class RUNTIME_STATUS {
 	}
 	
 	public static STATUS getStatus() {
-		assert status != null;
+		if(status == null) {
+			throw new AssertionError("RUNTIME_STATUS requested but not properly set prior to action.", null);
+		}
 		return status;
 	}
 }

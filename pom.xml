@@ -36,6 +36,30 @@
     
     <plugins>
     	<plugin>
+    		<artifactId>maven-resources-plugin</artifactId>
+    		<executions>
+    			<execution>
+    				<id>copy-resources</id>
+    				<phase>generate-resources</phase>
+    				<goals>
+    					<goal>copy-resources</goal>
+    				</goals>
+    				<configuration>
+    					<outputDirectory>C:/Apache24_Debug/htdocs/res</outputDirectory>
+    					<overwrite>true</overwrite>
+ 						<resources>
+ 							<resource>
+ 								<directory>${basedir}/tests/res</directory>
+ 								<includes>
+ 									<include>*.html</include>
+ 								</includes>
+ 							</resource>
+ 						</resources>
+    				</configuration>
+    			</execution>
+    		</executions>
+    	</plugin>
+    	<plugin>
     		<groupId>org.apache.maven.plugins</groupId>
     		<artifactId>maven-compiler-plugin</artifactId>
     		<version>3.1</version>

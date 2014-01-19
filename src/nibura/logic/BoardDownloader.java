@@ -49,13 +49,13 @@ public class BoardDownloader {
 		// Check for 404 NOT FOUND
 		StatusLine status = response.getStatusLine();
 		if(status.getStatusCode() == 404) {
-			throw new InvalidBoardException("404 BOARD URL NOT FOUND (" + url + ")");
+			throw new InvalidBoardException("404 BOARD NOT FOUND (" + url + ")");
 		}
 		
 		String content = "";
 		try {
 			HttpEntity entity =  response.getEntity();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent(),Charset.forName("SJIS")));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent(),Charset.forName("UTF-8")));
 			String line = "";
 			while((line = reader.readLine()) != null ) {
 				content += line;

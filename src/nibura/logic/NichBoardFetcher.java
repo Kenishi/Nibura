@@ -19,8 +19,6 @@ public class NichBoardFetcher extends AbstractBoardFetcher {
 	ThreadList postList = new ThreadList();
 	
 	public NichBoardFetcher(BoardLink link) throws InvalidSuiteTypeException, ParsingErrorException, InvalidBoardException, MalformedURLException, FileNotFoundException {
-		if(!(link instanceof FileBoardLink)) {
-			
 			// Confirm suite is as expected
 			if(link.getSuiteType() != SuiteType.NICH_SUITE)
 				throw new InvalidSuiteTypeException("Board Fetcher expected NICH_SUITE, but got "
@@ -31,22 +29,6 @@ public class NichBoardFetcher extends AbstractBoardFetcher {
 			
 			// Begin parsing
 			postList = parseHTML(html, link.getLink());
-		}
-		else { // File method for unit testing
-			// Confirm suite is as expected
-			if(link.getSuiteType() != SuiteType.NICH_SUITE)
-				throw new InvalidSuiteTypeException("Board Fetcher expected NICH_SUITE, but got "
-								+ link.getSuiteType().toString() + "instead.");
-			//Get HTML from File
-			FileBoardLink fileLink = (FileBoardLink)link;
-			Scanner scanner = new Scanner(fileLink.getFile());
-			String html = scanner.useDelimiter("\\Z").next();
-			scanner.close();
-			
-			// Begin parsing
-			postList = parseHTML(html,fileLink.getLink());
-		}
-	
 	}
 	
 	protected NichBoardFetcher() {}
@@ -87,7 +69,7 @@ public class NichBoardFetcher extends AbstractBoardFetcher {
 			
 			// Parse string
 			String eleText = ele.text();
-			String regex = "(?is)(?<ord>[\\d]+?): (?<title>(.*))(?:.*)(?:\\((?<count>\\d+)\\))";
+			String regex = "(?is)(?<ord>[\\d]+?): (?<title>(.*))(?: )(?:\\((?<count>\\d+)\\))";
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(eleText);
 			matcher.find();

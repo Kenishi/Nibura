@@ -1,5 +1,5 @@
 package nibura.logic;
 
-public class AbstractThreadFetcher {
-
+public abstract class AbstractThreadFetcher {
+	abstract Thread getThread();
 }

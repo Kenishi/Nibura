@@ -16,7 +16,7 @@ public enum TestResources {
 	NICH_LIVE_EXPECTED_HTML("/res/2CH_LIVE_BOARDLIST_EXPECTED.html"),
 	
 	/* A partial board HTML */
-	NICH_LIVE_BOARD_HTML("/res/2CH_TEST_BOARD.html"),
+	NICH_LIVE_BOARD_HTML("/res/2CH_TEST_BOARD_"), // subback.html will be attached in the test routine
 	NICH_LIVE_BOARD_EXPECTED("/res/2CH_TEST_BOARD_EXPECTED.csv"),
 	
 	/* A partial thread */

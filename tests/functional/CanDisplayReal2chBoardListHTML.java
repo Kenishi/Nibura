@@ -18,6 +18,7 @@ import nibura.logic.RUNTIME_STATUS.STATUS;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class CanDisplayReal2chBoardListHTML {
@@ -27,7 +28,7 @@ public class CanDisplayReal2chBoardListHTML {
 		RUNTIME_STATUS.setStatus(STATUS.DEBUG);
 	}
 
-	@Test
+	@Ignore @Test
 	public void shouldGetLiveBoardListHTML() throws FileNotFoundException, Exception {
 		// Setup
 		NichBoardListFetcher fetcher = new NichBoardListFetcher();
