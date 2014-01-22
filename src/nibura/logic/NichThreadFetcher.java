@@ -3,15 +3,21 @@ package nibura.logic;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.apache.http.client.ClientProtocolException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Tag;
+import org.jsoup.select.Elements;
 
 import nibura.logic.BoardListElement.SuiteType;
 
 public class NichThreadFetcher extends AbstractThreadFetcher {
 	private Thread thread = null;
 	
-	public NichThreadFetcher(ThreadLink link) throws InvalidSuiteTypeException {
+	public NichThreadFetcher(ThreadLink link) throws InvalidSuiteTypeException, ParsingErrorException {
 		// Confirm Thread Link Suite is of correct type
 		if(link.getSuiteType() != SuiteType.NICH_SUITE) {
 			throw new InvalidSuiteTypeException("Thread Fetcher expected NICH_SUITE but got " + 
@@ -46,9 +52,22 @@ public class NichThreadFetcher extends AbstractThreadFetcher {
 		return content;
 	}
 	private Thread parseHTML(String html) {
+		Document doc = Jsoup.parse(html);
+		Elements threadPosts = doc.select(".thread > *");
 		
+		ArrayList<Elements> postElements = new ArrayList<Elements>();
+		ArrayList<Post> posts = new ArrayList<Post>();
+		for(Element ele: threadPosts) {
+			if(ele.tag() == Tag.valueOf("DT")) {
+				posts.add(createPostFromDOM(postElements));
+			}
+		}
 		
 		return null;
+	}
+	
+	private Post createPostFromDOM(ArrayList<Elements> postElements) {
+		
 	}
 
 	

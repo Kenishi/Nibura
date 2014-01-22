@@ -22,7 +22,7 @@ public enum TestResources {
 	/* A partial thread */
 	NICH_LIVE_THREAD_HTML("/res/2CH_TEST_THREAD.html"),
 	
-	/* Test Resource to chekc Apache Sever */
+	/* Test Resource to check Apache Sever */
 	APACHE_TEST_RESOURCE("/res/APACHE_TEST.txt");
 	
 	private String relPathToRes = null;

@@ -22,12 +22,20 @@ import java.io.IOException;
 
 class ApacheServer {
 	private static ApacheServer instance = null;
-	private final String HTTPD_SERVER = "C:/Apache24_Debug/bin/httpd.exe";
+	private String HTTPD_COMMAND = null;
 	private static Process server = null;
 	
 	private ApacheServer() throws IOException {
+		String os_name = System.getProperty("os.name");
+		if(os_name.contains("Mac OS")) {
+			HTTPD_COMMAND = "/usr/sbin/httpd start";
+		}
+		else if(os_name.contains("Windows")) {
+			HTTPD_COMMAND = "C:/Apache24_Debug/bin/httpd.exe";
+		}
+		
 		if(!isRunning()) {
-			server = Runtime.getRuntime().exec(HTTPD_SERVER);
+			server = Runtime.getRuntime().exec(HTTPD_COMMAND);
 		}
 	}
 

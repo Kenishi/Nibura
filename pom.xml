@@ -45,7 +45,7 @@
     					<goal>copy-resources</goal>
     				</goals>
     				<configuration>
-    					<outputDirectory>C:/Apache24_Debug/htdocs/res</outputDirectory>
+    					<outputDirectory>${user.apache_path}</outputDirectory>
     					<overwrite>true</overwrite>
  						<resources>
  							<resource>
