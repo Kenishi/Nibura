@@ -20,41 +20,34 @@ package functional;
 
 import java.io.IOException;
 
-class ApacheServer {
+abstract class ApacheServer {
 	private static ApacheServer instance = null;
-	private String HTTPD_COMMAND = null;
-	private static Process server = null;
 	
-	private ApacheServer() throws IOException {
-		String os_name = System.getProperty("os.name");
-		if(os_name.contains("Mac OS")) {
-			HTTPD_COMMAND = "/usr/sbin/httpd start";
-		}
-		else if(os_name.contains("Windows")) {
-			HTTPD_COMMAND = "C:/Apache24_Debug/bin/httpd.exe";
-		}
-		
-		if(!isRunning()) {
-			server = Runtime.getRuntime().exec(HTTPD_COMMAND);
-		}
+	public enum OS {
+		MAC, WIN, UKNOWN;
 	}
+	
+	protected abstract OS getOS();
+	
 
-	public static ApacheServer createServerInstance() throws IOException {
-		if(instance == null)
-			return new ApacheServer();
-		else
-			return instance;
+	public abstract void exit();
+	public abstract boolean isRunning();
+	public static ApacheServer createServerInstance() throws IOException, UnknownOSException {
+		if(instance == null) {
+			String os_name = System.getProperty("os.name");
+			if(os_name.contains("Mac OS")) 
+				instance = new ApacheMacServer();
+			else if(os_name.contains("Windows"))
+				instance = new ApacheWinServer();
+			else
+				throw new UnknownOSException();
+		}
+		return instance;
 	}
 	
-	public static void exit() {
-		if(isRunning()) {
-			server.destroy();
-			server = null;
+	static class UnknownOSException extends Exception {
+		public UnknownOSException() {
+			super("Unknown OS defined when starting Apache Server.");
 		}
-	}
-	public static boolean isRunning() {
-		if(server == null)
-			return false;
-		return true;
 	}
 }
