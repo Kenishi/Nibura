@@ -22,7 +22,8 @@ public enum ResourceHandler {
 	}
 	
 	public InputStream getResourceStream() {
-		InputStream returnStream = ResourceHandler.class.getClass().getResourceAsStream(relPathToRes); 
+		InputStream returnStream = Object.class.getClass().getResourceAsStream(relPathToRes); 
 		return returnStream;
 	}
+	
 }

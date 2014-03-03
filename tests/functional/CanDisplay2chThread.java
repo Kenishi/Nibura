@@ -3,12 +3,16 @@ package functional;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import nibura.logic.Board;
 import nibura.logic.BoardList;
+import nibura.logic.InvalidSuiteTypeException;
 import nibura.logic.InvalidThreadException;
+import nibura.logic.NichThreadFetcher.PostParsingException;
+import nibura.logic.ParsingErrorException;
 import nibura.logic.Post;
 import nibura.logic.Thread;
 import nibura.logic.ThreadLink;
@@ -20,6 +24,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import functional.ApacheServer.UnknownOSException;
+
 public class CanDisplay2chThread {
 	private BoardList boardList = null;
 	private Board board = null;
@@ -27,12 +33,12 @@ public class CanDisplay2chThread {
 	private Thread thread = null;
 
 	@BeforeClass
-	public static void setupOnce() throws IOException {
+	public static void setupOnce() throws IOException, UnknownOSException {
 		ApacheServer.createServerInstance();
 	}
 	@AfterClass
-	public static void teardownOnce() {
-		ApacheServer.exit();
+	public static void teardownOnce() throws IOException, UnknownOSException {
+		ApacheServer.createServerInstance().exit();
 	}
 	
 	@Before
@@ -44,7 +50,7 @@ public class CanDisplay2chThread {
 	}
 
 	@Test(expected=InvalidThreadException.class)
-	public void shouldFailCorrectly() throws MalformedURLException {
+	public void shouldFailCorrectly() throws MalformedURLException, InvalidSuiteTypeException, ParsingErrorException, PostParsingException {
 		// Setup
 		threadLink = new ThreadLink("Test","http://www.google.com",424,SuiteType.NICH_SUITE);
 		
@@ -53,7 +59,7 @@ public class CanDisplay2chThread {
 	}
 	
 	@Test
-	public void shouldParseTestThreadHTML() {
+	public void shouldParseTestThreadHTML() throws ParseException, IOException, InvalidSuiteTypeException, ParsingErrorException, PostParsingException {
 		// Setup
 		URL url = TestResources.NICH_LIVE_THREAD_HTML.getLocalURL();
 		
@@ -113,9 +119,9 @@ public class CanDisplay2chThread {
 		Post post3 = thread.getPost(368);
 		
 		// Test
-		Assert.assertEqual(expectedPost1, post1);
-		Assert.assertEqual(expectedPost2, post2);
-		Assert.assertEqual(expectedPost3, post3);		
+		Assert.assertEquals(expectedPost1, post1);
+		Assert.assertEquals(expectedPost2, post2);
+		Assert.assertEquals(expectedPost3, post3);		
 	}
 	
 	@Test

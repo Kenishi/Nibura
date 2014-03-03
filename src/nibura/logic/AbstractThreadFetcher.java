@@ -1,5 +1,7 @@
 package nibura.logic;
 
+import java.util.ArrayList;
+
 public abstract class AbstractThreadFetcher {
-	abstract Thread getThread();
+	abstract ArrayList<Post> getPosts();
 }

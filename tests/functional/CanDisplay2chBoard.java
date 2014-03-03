@@ -32,18 +32,20 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.Assert;
 
+import functional.ApacheServer.UnknownOSException;
+
 public class CanDisplay2chBoard {
 	private Board board = null;
 	private BoardLink boardLink = null;
 	private ThreadList postList = null;
 	
 	@BeforeClass
-	public static void setUpOnce() throws IOException {
+	public static void setUpOnce() throws IOException, UnknownOSException {
 		ApacheServer.createServerInstance();
 	}
 	@AfterClass
-	public static void tearDownOnce() {
-		ApacheServer.exit();
+	public static void tearDownOnce() throws IOException, UnknownOSException {
+		ApacheServer.createServerInstance().exit();
 	}
 	
 	/*

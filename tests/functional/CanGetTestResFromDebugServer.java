@@ -21,13 +21,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import functional.ApacheServer.UnknownOSException;
+
 public class CanGetTestResFromDebugServer {
 	private static ApacheServer server = null;
 	
 	@BeforeClass
-	public static void setupOnce() throws IOException {
+	public static void setupOnce() throws IOException, UnknownOSException {
 		server = ApacheServer.createServerInstance();
 	}
+	
 	
 	@Test
 	public void test() throws IOException, URISyntaxException {
@@ -56,8 +59,8 @@ public class CanGetTestResFromDebugServer {
 	}
 	
 	@AfterClass
-	public static void tearDown() {
-		ApacheServer.exit();
+	public static void tearDown() throws IOException, UnknownOSException {
+		ApacheServer.createServerInstance().exit();
 	}
 
 }
